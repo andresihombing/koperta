@@ -4,50 +4,71 @@
 
 $this->title = 'My Yii Application';
 ?>
-<div class="site-index">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="site-index home-bg">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
+    <div class="container" style="padding: 100px 0px;">
+        <div class="jumbotron">
+            <h1 style="color: #fff;">Koperta</h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+            <p class="lead">Rasakan mengelola koperasi anda dengan mudah.</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+            <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Bergabung dengan kami</a></p>
+        </div>        
     </div>
 
-    <div class="body-content">
+</div>
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+<div class="container">
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <img src="https://indonesiadevelopmentforum.com/uploads/original/2018/06/idf-1528695621.jpg" alt="" class="img-responsive">        
+                </div>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+        </div>
+        <div class="col-md-6">
+            <p style="font-size: 18px;">Pemerintah tengah berupaya mendorong pemerataan ekonomi di seluruh wilayah Tanah Air dengan langkah yang dilakukan baik dari pemerintah pusat dan daerah. Mari kita tengok sedikit situasi hari ini. Pertama, kebijakan ekonomi dengan pola usaha individual, yang berorientasi pada kompetisi dan pengumpulan keuntungan oleh pemilik modal, telah melahirkan kesenjangan. Kedua, kesenjangan terlihat pada jumlah usaha di Indonesia secara keseluruhan 98,8 persen unit usaha adalah mikro, 1 persen usaha kecil, dan selebihnya 1 persen usaha menengah dan 0,01 persen usaha besar. Ketiga, kesenjangan juga tecermin dalam kepemilikan aset, 10 persen terkaya di Indonesia memiliki 77 persen aset dan 1 persen memiliki lebih dari 50 persen kekayaan negeri.</p>
+        </div>    
+    </div>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+    <div class="row" style="padding: 50px 0px;">
+        <center><h1 style="margin-bottom: 50px;"><b>Fitur yang kami tawarkan</b></h1></center>
+        
+        <div class="col-md-3">
+            <center>
+                <p class="fa fa-laptop" style="font-size:60px;"></p><br>
+                <b style="margin-bottom: 10px;">Web Development</b><br>
+                <p>Kembangkan bisnis anda secara tepat dengan konten yang sesuai dengan profil perusahaan anda.</p>
+            </center>
+        </div>
+        
+        <div class="col-md-3">
+            <center style="margin-bottom: 10px;">
+                <p class="fa fa-mobile-phone" style="font-size:60px;"></p><br>
+                <b style="margin-bottom: 10px;">Mobile Apps</b><br>
+                <p>Jangkau pelanggan dengan layanan bisnis anda langsung dari smartphone mereka.</p>
+            </center>
+        </div>
+        
+        <div class="col-md-3">
+            <center style="margin-bottom: 10px;">
+                <p class="fa fa-gears" style="font-size:60px;"></p><br>
+                <b style="margin-bottom: 10px;">Optimization</b><br>
+                <p>Optimalkan pemasaran produk anda dengan teknologi dan pengalaman kami hingga jangkauan yang tidak terbayangkan oleh anda.</p>
+            </center>
+        </div>
+        
+        <div class="col-md-3">
+            <center style="margin-bottom: 10px;">
+                <p class="fa fa-desktop" style="font-size:60px;"></p><br>
+                <b style="margin-bottom: 10px;">hardware</b><br>
+                <p>Kami menyediakan layanan pengadaan hardware untuk keutuhan bisnis anda dengan harga yang kompetitif dengan dukungan rekanan kami.    </p>
+            </center>
         </div>
 
     </div>
+
 </div>

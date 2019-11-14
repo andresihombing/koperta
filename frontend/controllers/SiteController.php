@@ -92,6 +92,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
+            $this->layout="main-2";
             $model->password = '';
 
             return $this->render('login', [
@@ -157,6 +158,8 @@ class SiteController extends Controller
             Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
             return $this->goHome();
         }
+
+        $this->layout="main-2";
 
         return $this->render('signup', [
             'model' => $model,

@@ -1,6 +1,7 @@
 html,
 body {
     height: 100%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .wrap {
@@ -101,6 +102,19 @@ a.desc:after {
     border: none;
 }
 
+.nav > li > a {
+    color: #fff;
+}
+
+.nav > li > a:hover {
+    color: #000;
+    border: 1px solid transparent;
+}
+
+.navbar > .container .navbar-brand {
+    color: #fff;
+}
+
 @media(max-width:767px) {
     .nav li > form > button.logout {
         display:block;
@@ -117,4 +131,8 @@ a.desc:after {
 
 .nav > li > form > button.logout:focus {
     outline: none;
+}
+
+.my-navbar {
+    color:red;
 }

@@ -32,7 +32,7 @@ AppAsset::register($this);
             'brandLabel' => "Koperta",
             'brandUrl' => Yii::$app->homeUrl,
             'options' => [
-                'class' => 'navbar navbar-fixed-top',      
+                'class' => 'navbar-inverse navbar-fixed-top',      
             ],
         ]);
         
@@ -64,13 +64,13 @@ AppAsset::register($this);
         NavBar::end();
     ?>
 
-    <!-- <div class="container"> -->
-        <!-- <?= Breadcrumbs::widget([
+    <div class="container">
+        <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <?= Alert::widget() ?> -->
+        <?= Alert::widget() ?>
         <?= $content ?>
-    <!-- </div> -->
+    </div>
 </div>
 
 <footer class="footer">
