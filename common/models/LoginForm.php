@@ -56,6 +56,10 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
+            // $koperasiId = new Profile::find()
+            // $_SESSION['koperasi_id'] = Yii::$app->user->id;
+            // echo Yii::$app->user->identity->username;
+            // die();
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
         

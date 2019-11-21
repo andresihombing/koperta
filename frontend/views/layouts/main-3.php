@@ -37,7 +37,7 @@ AppAsset::register($this);
         ]);
         
         $menuItems = [
-            ['label' => 'Peminjaman', 'url' => ['/koperasi/dashboard']],            
+            ['label' => 'Peminjaman', 'url' => ['/koperasi/dashboard','id' => $_SESSION['koperasi_id']]],            
         ];
 
         if (Yii::$app->user->isGuest) {

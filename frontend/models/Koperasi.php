@@ -61,4 +61,9 @@ class Koperasi extends \yii\db\ActiveRecord
             'kecamatan' => 'Kecamatan',
         ];
     }
+
+    public function getTipe()
+    {
+        return $this->hasOne(TipeKoperasi::className(), ['tipe_koperasi_id' => 'tipe_koperasi_id']);
+    }
 }

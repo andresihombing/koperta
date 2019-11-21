@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
+use frontend\models\Profile;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
@@ -90,6 +91,14 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            $profile = Profile::find()->where(['user_id' => Yii::$app->user->identity->id])->one();
+            
+            if($profile->koperasi_id != 0){
+                $_SESSION['koperasi_id'] = $profile->koperasi_id;
+                
+                return $this->redirect(['koperasi/dashboard', 'id' => $profile->koperasi_id]);    
+            }
+
             return $this->goBack();
         } else {
             $this->layout="main-2";
@@ -156,6 +165,7 @@ class SiteController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
+
             return $this->goHome();
         }
 

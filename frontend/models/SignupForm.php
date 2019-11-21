@@ -52,13 +52,26 @@ class SignupForm extends Model
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
-
-        // Register user and send verification email
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
+        $user->save();
+        
+        $profile = new Profile();
+        $profile->user_id = $user->id;
+        $profile->koperasi_id = 0;
+        $profile->nama = $user->username;
+        $profile->alamat = "";
+        // $profile->tanggal_lahir = date(format); 
+
+        // Register user and send verification email
         // return $user->save() && $this->sendEmail($user);
 
-        return $user->save();
+        
+        // echo "<pre>";
+        // print_r($profile->getErrors());
+        // echo "</pre>";
+        // die();
+        return $profile->save();
     }
 
     /**

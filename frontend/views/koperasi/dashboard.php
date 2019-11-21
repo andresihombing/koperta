@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [            
             'name',
             'tanggal_berdiri',
-            'tipe_koperasi_id.',
+            'tipe.tipe',            
             'alamat',
             'deskripsi:ntext',
             'kode_pos',

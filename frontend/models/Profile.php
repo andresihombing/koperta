@@ -30,7 +30,7 @@ class Profile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nama', 'alamat', 'tanggal_lahir', 'koperasi_id', 'user_id'], 'required'],
+            [['user_id'], 'required'],
             [['tanggal_lahir'], 'safe'],
             [['koperasi_id', 'user_id'], 'integer'],
             [['nama', 'alamat'], 'string', 'max' => 45],

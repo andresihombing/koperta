@@ -42,8 +42,7 @@ AppAsset::register($this);
             ['label' => 'Syarat & Ketentuan', 'url' => ['/site/termsAndCondition']],
         ];
 
-        if (Yii::$app->user->isGuest) {
-            $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
+        if (Yii::$app->user->isGuest) {            
             $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
         } else {
             $menuItems[] = '<li>'

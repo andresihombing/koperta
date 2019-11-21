@@ -13,8 +13,11 @@ use yii\helpers\Html;
             <h1 style="color: #fff;">Koperta</h1>
 
             <p class="lead">Rasakan mengelola koperasi anda dengan mudah.</p>
-            
-            <?= Html::a('Bergabung dengan kami', ['koperasi/create'], ['class' => 'btn btn-success']) ?>
+            <?php if (Yii::$app->user->identity == null) { ?>
+                <?= Html::a('Bergabung dengan kami', ['site/signup'], ['class' => 'btn btn-success']) ?>
+            <?php } else { ?>
+                <?= Html::a('Daftarkan Koperasi Anda', ['koperasi/create'], ['class' => 'btn btn-success']) ?>
+            <?php } ?>
         </div>        
     </div>
 

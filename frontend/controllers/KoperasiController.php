@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use frontend\models\Koperasi;
 use frontend\models\search\KoperasiSearch;
+use frontend\models\Profile;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -77,8 +78,13 @@ class KoperasiController extends Controller
         $this->layout = "main-2";
         $model = new Koperasi();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->koperasi_id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $profile = Profile::find()->where(['user_id' => Yii::$app->user->identity->id])->one();
+            $model->save();
+            $profile->koperasi_id = $model->koperasi_id;            
+            $profile->save();
+            if(!isset($_SESSION['koperasi_id'])) $_SESSION['koperasi_id'] = $model->koperasi_id;
+            return $this->redirect(['dashboard', 'id' => $model->koperasi_id]);
         }
 
         return $this->render('create', [
