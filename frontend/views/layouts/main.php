@@ -38,7 +38,7 @@ AppAsset::register($this);
         
         $menuItems = [
             ['label' => 'Beranda', 'url' => ['/site/index']],
-            ['label' => 'Kontak', 'url' => ['/site/contact']],
+            ['label' => 'Profile', 'url' => ['/profile/create']],
             ['label' => 'Syarat & Ketentuan', 'url' => ['/site/termsAndCondition']],
         ];
 

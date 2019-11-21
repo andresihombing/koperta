@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
+use yii\helpers\Html;
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="site-index home-bg">
@@ -12,8 +13,8 @@ $this->title = 'My Yii Application';
             <h1 style="color: #fff;">Koperta</h1>
 
             <p class="lead">Rasakan mengelola koperasi anda dengan mudah.</p>
-
-            <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Bergabung dengan kami</a></p>
+            
+            <?= Html::a('Bergabung dengan kami', ['koperasi/create'], ['class' => 'btn btn-success']) ?>
         </div>        
     </div>
 
