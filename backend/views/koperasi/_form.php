@@ -2,12 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
-use frontend\models\TipeKoperasi;
-use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Koperasi */
+/* @var $model backend\models\Koperasi */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -17,21 +14,9 @@ use dosamigos\datepicker\DatePicker;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <b>Tanggal Berdiri</b>
-    <?= DatePicker::widget([
-    'model' => $model,
-    'attribute' => 'tanggal_berdiri',    
-    'template' => '{addon}{input}',
-        'clientOptions' => [
-            'autoclose' => true,
-            'format' => 'yyyy-M-dd'
-        ]
-    ])?>
-    <br>
-    
-    <?= $form->field($model, 'tipe_koperasi_id')->dropDownList(
-            ArrayHelper::map(TipeKoperasi::find()->all(), 'tipe_koperasi_id', 'tipe'),["prompt"=>"Tipe Koperasi"])->label('Tipe Koperasi')
-    ?>
+    <?= $form->field($model, 'tanggal_berdiri')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'tipe_koperasi_id')->textInput() ?>
 
     <?= $form->field($model, 'alamat')->textInput(['maxlength' => true]) ?>
 
@@ -44,6 +29,8 @@ use dosamigos\datepicker\DatePicker;
     <?= $form->field($model, 'kabupaten')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'kecamatan')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'status')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
