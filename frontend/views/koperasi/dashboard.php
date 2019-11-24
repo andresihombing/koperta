@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use dosamigos\highcharts\HighCharts;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Koperasi */
@@ -50,5 +51,61 @@ $this->params['breadcrumbs'][] = $this->title;
             'kecamatan',
         ],
     ]) ?>
+
+<?=
+HighCharts::widget([   
+    'clientOptions' => [
+        'chart' => ['type' => 'pie'],
+        'title' => ['text' => 'Data Realisasi Tahunan'],
+        'legend' => ['enabled' => TRUE],
+
+        'showInLegend'=> ['enable' =>true],
+
+        'plotOptions' => [
+        'pie' => [
+            'allowPointSelect'=> false,
+            'cursor'=> 'pointer',
+            // 'colors'=> 'pieColors',
+            'dataLabels'=> [
+                'enabled'=> true,
+                'format'=> '<b>{point.name}</b><br>{point.percentage:.1f} %',
+                // 'distance'=> -50,
+                // 'filter'=> [
+                //     'property'=> 'percentage',
+                //     'operator'=> '>',
+                //     'value'=> 4
+                // ]
+            ],
+            'showInLegend'=> true
+        ]
+    ],
+
+    'series' => [[// mind the [[ instead of [
+
+
+        'type' => 'pie',
+        'name' => 'Jumlah',
+        'data' => [
+                [
+                    'name' => 'Terealisasi',
+                    'y' => 1,
+                    'color' => '#FF2E2E'
+                ],
+                [
+                    'name' => 'Tidak Terealisasi',
+                    'y' => 2,
+                    'color' => '#2EFFB0'
+                ],
+                [
+                    'name' => 'Terealisasi Sebagian',
+                    'y' => 3,
+                    'color' => '#7cb5ec'
+                ],
+              ]
+        ]],
+    ]
+]);
+
+?>
 
 </div>

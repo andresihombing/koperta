@@ -100,6 +100,7 @@ a.desc:after {
 .nav li > form > button.logout {
     padding: 15px;
     border: none;
+    color: white;
 }
 
 .nav > li > a {

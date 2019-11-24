@@ -30,7 +30,7 @@ AppAsset::register($this);
     <?php
         NavBar::begin([
             'brandLabel' => "Koperta",
-            'brandUrl' => Yii::$app->homeUrl,
+            'brandUrl' => (isset($_SESSION['koperasi_id']) && $_SESSION['koperasi_id'] != 0) ? ['/koperasi/dashboard', 'id' => $_SESSION['koperasi_id']] : Yii::$app->homeUrl,
             'options' => [
                 'class' => 'navbar-inverse navbar-fixed-top',      
             ],
@@ -38,7 +38,7 @@ AppAsset::register($this);
         
         $menuItems = [
             ['label' => 'Beranda', 'url' => ['/site/index']],
-            ['label' => 'Kontak', 'url' => ['/site/contact']],
+            ['label' => 'Profile', 'url' => ['/profile/create']],
             ['label' => 'Syarat & Ketentuan', 'url' => ['/site/termsAndCondition']],
         ];
 
