@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
+use common\components\ToolsColumn;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\KoperasiSearch */
@@ -48,9 +50,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'common\components\ToolsColumn',
+                'template' => '{view} {approve}',
+                'buttons' => [                    
+                    'approve' => function ($url, $model){                        
+                        return ToolsColumn::renderCustomButton($url, $model, 'Approve', 'glyphicon glyphicon-pencil');
+                    }
+                ],
+                'urlCreator' => function ($action, $model, $key, $index){
+                    if ($action === 'view') {
+                        return Url::toRoute(['view', 'id' => $key]);
+                    }else if ($action === 'approve') {
+                        return Url::toRoute(['approve', 'id' => $key]);
+                    }
+                }
+            ],
         ],
     ]); ?>
-
 
 </div>
