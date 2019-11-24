@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "479ef81c55accfcdd0cce616ef4143d7",
+    "content-hash": "3debbf69ce2cadc45577ad8726e8de67",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.4.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:twbs/bootstrap.git",
+                "url": "https://github.com/twbs/bootstrap.git",
                 "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
             },
             "dist": {
@@ -28,11 +28,29 @@
             ]
         },
         {
+            "name": "bower-asset/bootstrap-toggle",
+            "version": "2.2.2",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:minhur/bootstrap-toggle.git",
+                "reference": "187e332b7431afe3d0c07eeef92782ce59a77d66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/minhur/bootstrap-toggle/zipball/187e332b7431afe3d0c07eeef92782ce59a77d66",
+                "reference": "187e332b7431afe3d0c07eeef92782ce59a77d66"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
             "name": "bower-asset/inputmask",
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RobinHerbots/Inputmask.git",
+                "url": "git@github.com:RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -71,7 +89,7 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "git@github.com:bestiejs/punycode.js.git",
+                "url": "https://github.com/bestiejs/punycode.js.git",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "dist": {
@@ -326,6 +344,52 @@
                 "html"
             ],
             "time": "2019-10-28T03:44:26+00:00"
+        },
+        {
+            "name": "loveorigami/yii2-bootstrap-toggle",
+            "version": "1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/loveorigami/yii2-bootstrap-toggle.git",
+                "reference": "27ee6469f784b9163c03ee760e34c7ef751be148"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/loveorigami/yii2-bootstrap-toggle/zipball/27ee6469f784b9163c03ee760e34c7ef751be148",
+                "reference": "27ee6469f784b9163c03ee760e34c7ef751be148",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/bootstrap-toggle": "*",
+                "yiisoft/yii2": "2.0.*"
+            },
+            "require-dev": {
+                "yiisoft/yii2-debug": "2.0.*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "lo\\widgets\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Andrey Lukyanov",
+                    "email": "loveorigami@mail.ru"
+                }
+            ],
+            "description": "Yii2 bootstrap-toggle widget",
+            "keywords": [
+                "bootstrap",
+                "toggle",
+                "widget",
+                "yii2"
+            ],
+            "time": "2016-05-12T15:57:40+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

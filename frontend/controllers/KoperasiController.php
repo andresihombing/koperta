@@ -126,6 +126,18 @@ class KoperasiController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionFitur($id)
+    {
+        $this->layout = 'main-3';
+        
+        $model = new Koperasi();
+        
+        return $this->render('fitur', [
+            'id' => $id,
+            'model' => $model
+        ]);
+    }
+
     /**
      * Finds the Koperasi model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
