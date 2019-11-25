@@ -13,7 +13,13 @@ $this->title = "Koperasi - Fitur";
 
     <?php $form = ActiveForm::begin() ?>
 
-    <?= $form->field($model, 'status')->widget(Toggle::className()); ?>
+    <?= $form->field($model, 'tanah_bangunan')->widget(Toggle::className()); ?>
+
+    <?= $form->field($model, 'jenis_kendaraan')->widget(Toggle::className()); ?>
+
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
 
     <?php ActiveForm::end() ?>
 
@@ -22,17 +28,40 @@ $this->title = "Koperasi - Fitur";
 <?php
 
     $this->registerJs("
-        var koperasiField = $('.field-koperasi-status');
-        var koperasiStatus = $('.field-koperasi-status > .toggle');
 
         $(document).ready(function() {
-            koperasiField.click(function() {
-                if(koperasiField.children().hasClass('btn-success')) { 
-                    console.log('success');
+            var tanahBangunan = $('.field-customsimpanpinjam-tanah_bangunan');
+            var jenisKendaraan = $('.field-customsimpanpinjam-jenis_kendaraan');
+            // var suratKeterangan = $('.field-customsimpanpinjam-surat_keterangan');
+            
+            tanahBangunan.click(function() {
+                if(tanahBangunan.children().hasClass('btn-success')) { 
+                    console.log('off');
+                    tanahBangunanChoices.hide();
                 } else {
-                    console.log('fail');
+                    console.log('on');
+                    tanahBangunanChoices.show();
                 }
             });
+
+            jenisKendaraan.click(function() {
+                if(jenisKendaraan.children().hasClass('btn-success')) { 
+                    console.log('off');
+                    jenisKendaraanChoices.hide();
+                } else {
+                    console.log('on');
+                    jenisKendaraanChoices.show();
+                }
+            });
+
+            // suratKeterangan.click(function() {
+            //     if(suratKeterangan.children().hasClass('btn-success')) { 
+            //         console.log('off');
+            //     } else {
+            //         console.log('on');
+            //     }
+            // });
+
         });
 
     ", $this::POS_END);
