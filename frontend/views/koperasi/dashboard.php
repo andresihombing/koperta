@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-<?=
+<!-- <?=
 HighCharts::widget([   
     'clientOptions' => [
         'chart' => ['type' => 'pie'],
@@ -106,6 +106,6 @@ HighCharts::widget([
     ]
 ]);
 
-?>
+?> -->
 
 </div>
