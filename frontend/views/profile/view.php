@@ -11,30 +11,25 @@ $this->params['breadcrumbs'][] = ['label' => 'Profiles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="profile-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="profile-view">    
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->profile_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->profile_id], [
+        <?= Html::a('Edit Profile', ['update', 'id' => $model->profile_id], ['class' => 'btn btn-primary ']) ?>
+        <!-- <?= Html::a('Delete', ['delete', 'id' => $model->profile_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
-        ]) ?>
+        ]) ?> -->
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
-        'attributes' => [
-            'profile_id',
+        'attributes' => [            
             'nama',
             'alamat',
-            'tanggal_lahir',
-            'koperasi_id',
-            'user_id',
+            'tanggal_lahir',            
         ],
     ]) ?>
 
