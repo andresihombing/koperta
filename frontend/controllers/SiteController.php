@@ -93,11 +93,13 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             $profile = Profile::find()->where(['user_id' => Yii::$app->user->identity->id])->one();
             
+            $_SESSION['profile_id'] = $profile->profile_id;
             if($profile->koperasi_id != 0){
-                $_SESSION['koperasi_id'] = $profile->koperasi_id;
+                $_SESSION['koperasi_id'] = $profile->koperasi_id;                
                 
                 return $this->redirect(['koperasi/dashboard', 'id' => $profile->koperasi_id]);    
             }
+
 
             return $this->goBack();
         } else {

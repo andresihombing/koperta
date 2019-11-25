@@ -38,7 +38,8 @@ AppAsset::register($this);
         
         $menuItems = [
             ['label' => 'Beranda', 'url' => ['/site/index']],
-            ['label' => 'Profile', 'url' => ['/profile/create']],
+            
+            isset($_SESSION['profile_id']) ? ['label' => 'Profile', 'url' => ['/profile/view', 'id' => (isset($_SESSION['profile_id']) && $_SESSION['profile_id'] != null) ? $_SESSION['profile_id'] : 0]] : "",
             ['label' => 'Syarat & Ketentuan', 'url' => ['/site/termsAndCondition']],
         ];
 
