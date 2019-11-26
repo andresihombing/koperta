@@ -17,7 +17,7 @@ use Yii;
  */
 class JaminanKendaraan extends \yii\db\ActiveRecord
 {
-    public $choices;
+    // public $choices;
 
     /**
      * {@inheritdoc}
@@ -37,7 +37,7 @@ class JaminanKendaraan extends \yii\db\ActiveRecord
             [['jaminan_kendaraan_id', 'nama_pemilik', 'no_polisi', 'tahun_pembuatan', 'nilai_harga'], 'integer'],
             [['merk', 'warna'], 'string', 'max' => 250],
             [['jaminan_kendaraan_id'], 'unique'],
-            [['koperasi_id'], 'exist', 'skipOnError' => true, 'targetClass' => Koperasi::className(), 'targetAttribute' => ['koperasi_id' => 'id']],
+            // [['koperasi_id'], 'exist', 'skipOnError' => true, 'targetClass' => Koperasi::className(), 'targetAttribute' => ['koperasi_id' => 'id']],
         ];
     }
 
