@@ -135,8 +135,8 @@ class KoperasiController extends Controller
         
         $model = CustomSimpanPinjam::find()->where(['koperasi_id' => $id])->one();
 
-        if($model->load(Yii::$app->request->post())) {
-            
+        if($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['/koperasi/dashboard', 'id' => $id]);
         }
 
         return $this->render('fitur', [

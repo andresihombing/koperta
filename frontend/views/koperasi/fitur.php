@@ -18,7 +18,8 @@ $this->title = "Koperasi - Fitur";
     <?= $form->field($model, 'jenis_kendaraan')->widget(Toggle::className()); ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Simpan Kustomisasi', ['class' => 'btn btn-success']) ?>
+        <?= Html::a("Batal", ['koperasi/dashboard', 'id' => $id], ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end() ?>
