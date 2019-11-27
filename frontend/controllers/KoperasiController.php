@@ -5,6 +5,9 @@ namespace frontend\controllers;
 use Yii;
 use frontend\models\Koperasi;
 use frontend\models\search\KoperasiSearch;
+use frontend\models\CustomSimpanPinjam;
+use frontend\models\JaminanTanahBangunan;
+use frontend\models\JaminanKendaraan;
 use frontend\models\Profile;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -124,6 +127,22 @@ class KoperasiController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionFitur($id)
+    {
+        $this->layout = 'main-3';
+        
+        $model = CustomSimpanPinjam::find()->where(['koperasi_id' => $id])->one();
+
+        if($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['/koperasi/dashboard', 'id' => $id]);
+        }
+
+        return $this->render('fitur', [
+            'id' => $id,
+            'model' => $model
+        ]);
     }
 
     /**

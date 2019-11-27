@@ -13,6 +13,7 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $alamat;
 
 
     /**
@@ -22,14 +23,14 @@ class SignupForm extends Model
     {
         return [
             ['username', 'trim'],
-            ['username', 'required'],
+            [['username','alamat'], 'required'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'string', 'max' => 255],
+            [['email', 'alamat'], 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
             ['password', 'required'],
@@ -60,7 +61,7 @@ class SignupForm extends Model
         $profile->user_id = $user->id;
         $profile->koperasi_id = 0;
         $profile->nama = $user->username;
-        $profile->alamat = "";
+        $profile->alamat = $this->alamat;
         // $profile->tanggal_lahir = date(format); 
 
         // Register user and send verification email

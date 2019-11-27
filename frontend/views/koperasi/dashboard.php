@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use dosamigos\highcharts\HighCharts;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Koperasi */
@@ -15,13 +16,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php if ($model->status == 0){ ?>
         <?= Yii::$app->session->setFlash('success', "Berhasil Melakukan Pendaftaran.<br>Selanjutnya Menunggu Approve dari Admin."); ?>
         <p>
-            <?= Html::submitButton('Pilih Fitur', ['class' => 'btn btn-primary', 'disabled' => 'disabled']) ?>
+            <?= Html::a('Pilih Fitur','', ['class' => 'btn btn-primary', 'disabled' => 'disabled']) ?>
         </p>
     <?php } else { ?>
         <p>
-            <?= Html::submitButton('Pilih Fitur', ['class' => 'btn btn-primary']) ?>
-        </p>
+            <!-- <?= Html::a('Peminjaman', ['peminjaman/create'], ['class' => 'btn btn-primary']) ?> -->
+            <?= Html::a('Pilih Fitur', ['/koperasi/fitur', 'id' => $_GET['id']], ['class' => 'btn btn-primary']) ?>
+        </p>    
     <?php } ?>
+
 
     <!-- <h1><?= Html::encode($this->title) ?></h1> -->
 
@@ -50,5 +53,61 @@ $this->params['breadcrumbs'][] = $this->title;
             'kecamatan',
         ],
     ]) ?>
+
+<!-- <?=
+HighCharts::widget([   
+    'clientOptions' => [
+        'chart' => ['type' => 'pie'],
+        'title' => ['text' => 'Data Realisasi Tahunan'],
+        'legend' => ['enabled' => TRUE],
+
+        'showInLegend'=> ['enable' =>true],
+
+        'plotOptions' => [
+        'pie' => [
+            'allowPointSelect'=> false,
+            'cursor'=> 'pointer',
+            // 'colors'=> 'pieColors',
+            'dataLabels'=> [
+                'enabled'=> true,
+                'format'=> '<b>{point.name}</b><br>{point.percentage:.1f} %',
+                // 'distance'=> -50,
+                // 'filter'=> [
+                //     'property'=> 'percentage',
+                //     'operator'=> '>',
+                //     'value'=> 4
+                // ]
+            ],
+            'showInLegend'=> true
+        ]
+    ],
+
+    'series' => [[// mind the [[ instead of [
+
+
+        'type' => 'pie',
+        'name' => 'Jumlah',
+        'data' => [
+                [
+                    'name' => 'Terealisasi',
+                    'y' => 1,
+                    'color' => '#FF2E2E'
+                ],
+                [
+                    'name' => 'Tidak Terealisasi',
+                    'y' => 2,
+                    'color' => '#2EFFB0'
+                ],
+                [
+                    'name' => 'Terealisasi Sebagian',
+                    'y' => 3,
+                    'color' => '#7cb5ec'
+                ],
+              ]
+        ]],
+    ]
+]);
+
+?> -->
 
 </div>

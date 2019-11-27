@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Profile */
@@ -14,13 +15,19 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nama')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'alamat')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'alamat')->textInput(['maxlength' => true]) ?>    
 
-    <?= $form->field($model, 'tanggal_lahir')->textInput() ?>
-
-    <?= $form->field($model, 'koperasi_id')->textInput() ?>
-
-    <?= $form->field($model, 'user_id')->textInput() ?>
+    <b>Tanggal Lahir</b>
+    <?= DatePicker::widget([
+    'model' => $model,
+    'attribute' => 'tanggal_lahir',    
+    'template' => '{addon}{input}',
+        'clientOptions' => [
+            'autoclose' => true,
+            'format' => 'yyyy-M-dd'
+        ]
+    ])?>
+    <br>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
