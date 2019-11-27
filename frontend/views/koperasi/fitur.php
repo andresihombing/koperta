@@ -5,11 +5,15 @@ use yii\bootstrap\ActiveForm;
 use lo\widgets\Toggle;
 
 $this->title = "Koperasi - Fitur";
-
+$this->params['breadcrumbs'][] = ['label' => 'Peminjaman', 'url' => ['koperasi/dashboard', 'id' => $model->koperasi_id]];
+$this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+
 ?>
 
 <div class="fitur-koperasi">
+
+    <h2><?= Html::encode($this->title) ?></h2><hr>
 
     <?php $form = ActiveForm::begin() ?>
 
@@ -18,8 +22,8 @@ $this->title = "Koperasi - Fitur";
     <?= $form->field($model, 'jenis_kendaraan')->widget(Toggle::className()); ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Simpan Kustomisasi', ['class' => 'btn btn-success']) ?>
         <?= Html::a("Batal", ['koperasi/dashboard', 'id' => $id], ['class' => 'btn btn-danger']) ?>
+        <?= Html::submitButton('Simpan Kustomisasi', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end() ?>
