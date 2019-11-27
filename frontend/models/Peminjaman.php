@@ -44,7 +44,7 @@ class Peminjaman extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['anggota_id', 'koperasi_id', 'tujuan_kredit', 'nilai_permohonan', 'angsuran_kredit', 'total_angsuran', 'pekerjaan_utama', 'pekerjaan_sampingan', 'pendapatan_sampingan', 'total_pendapatan_kotor', 'biaya_lainnya', 'biaya_pengeluaran', 'pendapatan_bersih', 'jaminan_tanah_bangunan_id', 'jaminan_kendaraan_id', 'jaminan_sk_id', 'banyak_pinjaman', 'plafon_terakhir', 'tanggal_pelunasan'], 'required'],
+            [['anggota_id', 'koperasi_id', 'tujuan_kredit', 'nilai_permohonan', 'angsuran_kredit', 'total_angsuran', 'pekerjaan_utama', 'pekerjaan_sampingan', 'pendapatan_sampingan', 'total_pendapatan_kotor', 'biaya_lainnya', 'biaya_pengeluaran', 'pendapatan_bersih','banyak_pinjaman', 'plafon_terakhir', 'tanggal_pelunasan'], 'required'],
             [['anggota_id', 'koperasi_id', 'nilai_permohonan', 'angsuran_kredit', 'total_angsuran', 'pendapatan_sampingan', 'total_pendapatan_kotor', 'biaya_pengeluaran', 'pendapatan_bersih', 'jaminan_tanah_bangunan_id', 'jaminan_kendaraan_id', 'jaminan_sk_id', 'banyak_pinjaman', 'plafon_terakhir'], 'integer'],
             [['tujuan_kredit'], 'string'],
             [['tanggal_pelunasan'], 'safe'],

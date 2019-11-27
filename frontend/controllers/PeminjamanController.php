@@ -52,6 +52,7 @@ class PeminjamanController extends Controller
      */
     public function actionView($id)
     {
+        $this->layout = 'main-3';
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -64,9 +65,12 @@ class PeminjamanController extends Controller
      */
     public function actionCreate()
     {
+        $this->layout = 'main-3';
         $model = new Peminjaman();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->koperasi_id = $_SESSION['koperasi_id'];
+            $model->save();
             return $this->redirect(['view', 'id' => $model->peminjaman_id]);
         }
 

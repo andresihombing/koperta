@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php } else { ?>
         <p>
             <?= Html::submitButton('Pilih Fitur', ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Peminjaman', ['peminjaman/create'], ['class' => 'btn btn-primary']) ?>
         </p>
     <?php } ?>
 
