@@ -39,7 +39,7 @@ use yii\helpers\Html;
     </div>
 
     <div class="row" style="padding: 50px 0px;">
-        <center><h1 style="margin-bottom: 50px;"><b>Fitur yang kami tawarkan</b></h1></center>
+        <center><h1 style="margin-bottom: 50px;"><b>Kemudahan yang kami tawarkan</b></h1></center>
         
         <div class="col-md-3">
             <center>
@@ -52,7 +52,7 @@ use yii\helpers\Html;
         <div class="col-md-3">
             <center style="margin-bottom: 10px;">
                 <p class="fa fa-mobile-phone" style="font-size:60px;"></p><br>
-                <b style="margin-bottom: 10px;">Mobile Apps</b><br>
+                <b style="margin-bottom: 10px;">Mobile</b><br>
                 <p>Jangkau pelanggan dengan layanan bisnis anda langsung dari smartphone mereka.</p>
             </center>
         </div>
@@ -60,8 +60,8 @@ use yii\helpers\Html;
         <div class="col-md-3">
             <center style="margin-bottom: 10px;">
                 <p class="fa fa-gears" style="font-size:60px;"></p><br>
-                <b style="margin-bottom: 10px;">Optimization</b><br>
-                <p>Optimalkan pemasaran produk anda dengan teknologi dan pengalaman kami hingga jangkauan yang tidak terbayangkan oleh anda.</p>
+                <b style="margin-bottom: 10px;">Customisasi</b><br>
+                <p>Customisasi Fitur anda dengan mudah dan Cepat.</p>
             </center>
         </div>
         
@@ -69,7 +69,7 @@ use yii\helpers\Html;
             <center style="margin-bottom: 10px;">
                 <p class="fa fa-desktop" style="font-size:60px;"></p><br>
                 <b style="margin-bottom: 10px;">hardware</b><br>
-                <p>Kami menyediakan layanan pengadaan hardware untuk keutuhan bisnis anda dengan harga yang kompetitif dengan dukungan rekanan kami.    </p>
+                <p>Monitoring pendapatan dan pengeluaran koperasi anda dengan dengan mudah.</p>
             </center>
         </div>
 
