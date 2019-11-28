@@ -32,7 +32,6 @@ class Anggota extends \yii\db\ActiveRecord
     }
 
     public $email;
-
     /**
      * {@inheritdoc}
      */

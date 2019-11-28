@@ -30,6 +30,20 @@ use Yii;
  */
 class Peminjaman extends \yii\db\ActiveRecord
 {
+    //jaminan kendaraan
+    public $nama_pemilik_kendaraan;
+    public $no_polisi_kendaraan;
+    public $merk_kendaraan;
+    public $tahun_pembuatan_kendaraan;
+    public $warna_kendaraan;
+    public $nilai_harga_kendaraan;
+
+    //jaminan tanah bagunan
+    public $nama_pemilik_bangunan;
+    public $no_bangunan;
+    public $status_hak_milik_bangunan;
+    public $luas_bangunan;
+
     /**
      * {@inheritdoc}
      */
@@ -44,10 +58,10 @@ class Peminjaman extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['anggota_id', 'koperasi_id', 'tujuan_kredit', 'nilai_permohonan', 'angsuran_kredit', 'total_angsuran', 'pekerjaan_utama', 'pekerjaan_sampingan', 'pendapatan_sampingan', 'total_pendapatan_kotor', 'biaya_lainnya', 'biaya_pengeluaran', 'pendapatan_bersih', 'jaminan_tanah_bangunan_id', 'jaminan_kendaraan_id', 'jaminan_sk_id', 'banyak_pinjaman', 'plafon_terakhir', 'tanggal_pelunasan'], 'required'],
+            [['anggota_id', 'koperasi_id', 'tujuan_kredit', 'nilai_permohonan', 'angsuran_kredit', 'total_angsuran', 'pekerjaan_utama', 'pekerjaan_sampingan', 'pendapatan_sampingan', 'total_pendapatan_kotor', 'biaya_lainnya', 'biaya_pengeluaran', 'pendapatan_bersih','banyak_pinjaman', 'plafon_terakhir', 'tanggal_pelunasan'], 'required'],
             [['anggota_id', 'koperasi_id', 'nilai_permohonan', 'angsuran_kredit', 'total_angsuran', 'pendapatan_sampingan', 'total_pendapatan_kotor', 'biaya_pengeluaran', 'pendapatan_bersih', 'jaminan_tanah_bangunan_id', 'jaminan_kendaraan_id', 'jaminan_sk_id', 'banyak_pinjaman', 'plafon_terakhir'], 'integer'],
             [['tujuan_kredit'], 'string'],
-            [['tanggal_pelunasan'], 'safe'],
+            [['tanggal_pelunasan', 'nama_pemilik_kendaraan', 'no_polisi_kendaraan', 'merk_kendaraan', 'tahun_pembuatan_kendaraan', 'warna_kendaraan', 'nilai_harga_kendaraan', 'nama_pemilik_bangunan', 'no_bangunan', 'status_hak_milik_bangunan', 'luas_bangunan'], 'safe'],
             [['pekerjaan_utama', 'pekerjaan_sampingan'], 'string', 'max' => 250],
             [['biaya_lainnya'], 'string', 'max' => 500],
         ];
@@ -80,5 +94,23 @@ class Peminjaman extends \yii\db\ActiveRecord
             'plafon_terakhir' => 'Plafon Terakhir',
             'tanggal_pelunasan' => 'Tanggal Pelunasan',
         ];
+    }
+
+    public function getAnggota()
+    {
+        return $this->hasOne(Anggota::className(), ['anggota_id' => 'anggota_id']);
+    }
+
+    public function getKoperasi()
+    {
+        return $this->hasOne(Koperasi::className(), ['koperasi_id' => 'koperasi_id']);
+    }
+
+    public function getJaminanKendaraan(){
+        return $this->hasOne(JaminanKendaraan::className(), ['jaminan_kendaraan_id' => 'jaminan_kendaraan_id']);
+    }
+
+    public function getJaminanTanahBangunan(){
+        return $this->hasOne(JaminanTanahBangunan::className(), ['jaminan_tanah_bangunan_id' => 'jaminan_tanah_bangunan_id']);
     }
 }

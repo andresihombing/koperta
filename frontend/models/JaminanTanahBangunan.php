@@ -15,6 +15,8 @@ use Yii;
  */
 class JaminanTanahBangunan extends \yii\db\ActiveRecord
 {
+    // public $choices;
+
     /**
      * {@inheritdoc}
      */
@@ -33,6 +35,7 @@ class JaminanTanahBangunan extends \yii\db\ActiveRecord
             [['jaminan_tanah_bangunan_id', 'no', 'luas'], 'integer'],
             [['nama_pemilik', 'status_hak_milik'], 'string', 'max' => 250],
             [['jaminan_tanah_bangunan_id'], 'unique'],
+            // [['koperasi_id'], 'exist', 'skipOnError' => true, 'targetClass' => Koperasi::className(), 'targetAttribute' => ['koperasi_id' => 'id']],
         ];
     }
 
@@ -42,11 +45,11 @@ class JaminanTanahBangunan extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'jaminan_tanah_bangunan_id' => 'Jaminan Tanah Bangunan ID',
             'nama_pemilik' => 'Nama Pemilik',
             'no' => 'No',
             'status_hak_milik' => 'Status Hak Milik',
             'luas' => 'Luas',
         ];
     }
+
 }
