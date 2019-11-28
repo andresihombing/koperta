@@ -4,12 +4,12 @@ namespace frontend\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\models\TipeKoperasi;
+use frontend\models\Anggota;
 
 /**
- * TipeKoperasiSearch represents the model behind the search form of `frontend\models\TipeKoperasi`.
+ * AnggotaSearch represents the model behind the search form of `frontend\models\Anggota`.
  */
-class TipeKoperasiSearch extends TipeKoperasi
+class AnggotaSearch extends Anggota
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class TipeKoperasiSearch extends TipeKoperasi
     public function rules()
     {
         return [
-            [['tipe_koperasi_id'], 'integer'],
-            [['tipe'], 'safe'],
+            [['anggota_id', 'koperasi_id', 'no_ktp', 'perkawinan_ke', 'jumlah_anak'], 'integer'],
+            [['name', 'dob', 'alamat_lengkap', 'status'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class TipeKoperasiSearch extends TipeKoperasi
      */
     public function search($params)
     {
-        $query = TipeKoperasi::find();
+        $query = Anggota::find();
 
         // add conditions that should always apply here
 
@@ -58,10 +58,17 @@ class TipeKoperasiSearch extends TipeKoperasi
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'tipe_koperasi_id' => $this->tipe_koperasi_id,
+            'anggota_id' => $this->anggota_id,
+            'koperasi_id' => $this->koperasi_id,
+            'dob' => $this->dob,
+            'no_ktp' => $this->no_ktp,
+            'perkawinan_ke' => $this->perkawinan_ke,
+            'jumlah_anak' => $this->jumlah_anak,
         ]);
 
-        $query->andFilterWhere(['like', 'tipe', $this->tipe]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'alamat_lengkap', $this->alamat_lengkap])
+            ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;
     }
