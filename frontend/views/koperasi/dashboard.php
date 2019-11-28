@@ -16,13 +16,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php if ($model->status == 0){ ?>
         <?= Yii::$app->session->setFlash('success', "Berhasil Melakukan Pendaftaran.<br>Selanjutnya Menunggu Approve dari Admin."); ?>
         <p>
-            <?= Html::submitButton('Pilih Fitur', ['class' => 'btn btn-primary', 'disabled' => 'disabled']) ?>
+            <?= Html::a('Pilih Fitur','', ['class' => 'btn btn-primary', 'disabled' => 'disabled']) ?>
         </p>
     <?php } else { ?>
         <p>
-            <?= Html::submitButton('Pilih Fitur', ['class' => 'btn btn-primary']) ?>
-        </p>
+            <!-- <?= Html::a('Peminjaman', ['peminjaman/create'], ['class' => 'btn btn-primary']) ?> -->
+            <?= Html::a('Pilih Fitur', ['/koperasi/fitur', 'id' => $_GET['id']], ['class' => 'btn btn-primary']) ?>
+        </p>    
     <?php } ?>
+
 
     <!-- <h1><?= Html::encode($this->title) ?></h1> -->
 

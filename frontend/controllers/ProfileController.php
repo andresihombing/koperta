@@ -52,7 +52,12 @@ class ProfileController extends Controller
      */
     public function actionView($id)
     {
-        $this->layout = "main-2";
+        if (isset($_SESSION['koperasi_id'])) {
+            $this->layout = "main-3";
+        } else {
+            $this->layout = "main-2";
+        }
+        
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
