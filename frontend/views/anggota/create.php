@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="anggota-create">
 
-    <center><h1><?= Html::encode($this->title) ?></h1></center>
+    <center><h1><?= Html::encode($this->title) ?><hr style="width: 40%; background: #898e94; height: 5px; border-color : transparent;" /></center>
 
     <?= $this->render('_form', [
         'model' => $model,

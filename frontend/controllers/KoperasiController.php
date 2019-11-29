@@ -84,8 +84,18 @@ class KoperasiController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $profile = Profile::find()->where(['user_id' => Yii::$app->user->identity->id])->one();
             $model->save();
+            
             $profile->koperasi_id = $model->koperasi_id;            
             $profile->save();
+
+            //Kedepannya harus ada kondisi untuk tambah data sesuai tipe koperasi
+            $customization = new CustomSimpanPinjam();
+            $customization->tanah_bangunan = 0;
+            $customization->jenis_kendaraan = 0;
+            $customization->surat_keterangan = 0;
+            $customization->koperasi_id = $model->koperasi_id;
+            $customization->save();
+
             if(!isset($_SESSION['koperasi_id'])) $_SESSION['koperasi_id'] = $model->koperasi_id;
             return $this->redirect(['dashboard', 'id' => $model->koperasi_id]);
         }

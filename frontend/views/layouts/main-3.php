@@ -40,7 +40,8 @@ AppAsset::register($this);
         $menuItems = [
             ['label' => 'Beranda', 'url' => ['/koperasi/dashboard','id' => $_SESSION['koperasi_id']]],
             ['label' => 'Peminjaman', 'url' => ['/peminjaman/index']],
-            ['label' => 'Profile', 'url' => ['/profile/view', 'id' => (isset($_SESSION['profile_id']) && $_SESSION['profile_id'] != null) ? $_SESSION['profile_id'] : 0]],  
+            ['label' => 'Profile', 'url' => ['/profile/view', 'id' => (isset($_SESSION['profile_id']) && $_SESSION['profile_id'] != null) ? $_SESSION['profile_id'] : 0]],
+            ['label' => 'Anggota', 'url' => ['/anggota/index']],
         ];
 
         if (Yii::$app->user->isGuest) {
