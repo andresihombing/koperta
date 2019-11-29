@@ -1,9 +1,6 @@
 <?php
-
 namespace frontend\models;
-
 use Yii;
-
 /**
  * This is the model class for table "{{%peminjaman}}".
  *
@@ -37,13 +34,11 @@ class Peminjaman extends \yii\db\ActiveRecord
     public $tahun_pembuatan_kendaraan;
     public $warna_kendaraan;
     public $nilai_harga_kendaraan;
-
     //jaminan tanah bagunan
     public $nama_pemilik_bangunan;
     public $no_bangunan;
     public $status_hak_milik_bangunan;
     public $luas_bangunan;
-
     /**
      * {@inheritdoc}
      */
@@ -51,7 +46,6 @@ class Peminjaman extends \yii\db\ActiveRecord
     {
         return '{{%peminjaman}}';
     }
-
     /**
      * {@inheritdoc}
      */
@@ -66,7 +60,6 @@ class Peminjaman extends \yii\db\ActiveRecord
             [['biaya_lainnya'], 'string', 'max' => 500],
         ];
     }
-
     /**
      * {@inheritdoc}
      */
@@ -95,16 +88,14 @@ class Peminjaman extends \yii\db\ActiveRecord
             'tanggal_pelunasan' => 'Tanggal Pelunasan',
         ];
     }
-
     public function getAnggota()
     {
         return $this->hasOne(Anggota::className(), ['anggota_id' => 'anggota_id']);
     }
-
     public function getKoperasi()
     {
         return $this->hasOne(Koperasi::className(), ['koperasi_id' => 'koperasi_id']);
-    }
+    } 
 
     public function getJaminanKendaraan(){
         return $this->hasOne(JaminanKendaraan::className(), ['jaminan_kendaraan_id' => 'jaminan_kendaraan_id']);
