@@ -92,13 +92,11 @@ AppAsset::register($this);
 
       <div class="col-md-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="900ms">
         <div class="">
-          <h4>Langganan Email</h4>
-          <p >Dengan berlangganan newsletter kami, anda akan mendapatkan informasi terbaru dari Koperasi Koperta. Cukup masukan email Anda di kolom berikut:</p>
-          <div class="btn-gamp">
-            <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Enter Email">
-          </div>
-          <div class="btn-gamp">
-            <a type="submit" class="btn btn-default">Subscribe</a>
+          <h4>Langganan Dengan Kami</h4>
+          <p >Dapatkan sebuah dukungan software aplikasi berbasis website yang sudah dilengkapi dengan fitur Laporan Keuangan dan fitur-fitur lain sesuai dengan keinginan anda :</p>
+          
+          <div class="btn-gamp">          
+            <?= Html::a('Bergabung dengan kami', ['site/signup'], ['class' => 'btn btn-success']) ?>
           </div>
 
         </div>
