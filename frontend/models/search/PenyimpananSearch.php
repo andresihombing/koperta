@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\models;
+namespace frontend\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -17,8 +17,9 @@ class PenyimpananSearch extends Penyimpanan
     public function rules()
     {
         return [
-            [['penyimpanan_id', 'koperasi_id', 'anggota_id', 'nilai_simpanan', 'petugas_id'], 'integer'],
-            [['tgl_penyimpanan'], 'safe'],
+            [['penyimpanan_id', 'koperasi_id', 'anggota_id', 'tipe_penyimpanan_id', 'petugas_id'], 'integer'],
+            [['tgl_transaksi'], 'safe'],
+            [['nilai_transaksi'], 'number'],
         ];
     }
 
@@ -61,8 +62,9 @@ class PenyimpananSearch extends Penyimpanan
             'penyimpanan_id' => $this->penyimpanan_id,
             'koperasi_id' => $this->koperasi_id,
             'anggota_id' => $this->anggota_id,
-            'nilai_simpanan' => $this->nilai_simpanan,
-            'tgl_penyimpanan' => $this->tgl_penyimpanan,
+            'tgl_transaksi' => $this->tgl_transaksi,
+            'tipe_penyimpanan_id' => $this->tipe_penyimpanan_id,
+            'nilai_transaksi' => $this->nilai_transaksi,
             'petugas_id' => $this->petugas_id,
         ]);
 

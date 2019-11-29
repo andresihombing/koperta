@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\PenyimpananSearch */
+/* @var $model frontend\models\search\PenyimpananSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -21,9 +21,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'anggota_id') ?>
 
-    <?= $form->field($model, 'nilai_simpanan') ?>
+    <?= $form->field($model, 'tgl_transaksi') ?>
 
-    <?= $form->field($model, 'tgl_penyimpanan') ?>
+    <?= $form->field($model, 'tipe_penyimpanan_id') ?>
+
+    <?php // echo $form->field($model, 'nilai_transaksi') ?>
 
     <?php // echo $form->field($model, 'petugas_id') ?>
 

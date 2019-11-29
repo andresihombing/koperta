@@ -4,7 +4,8 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\Penyimpanan;
-use frontend\models\PenyimpananSearch;
+use frontend\models\search\PenyimpananSearch;
+use frontend\models\Petugas;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,8 +66,16 @@ class PenyimpananController extends Controller
     public function actionCreate()
     {
         $model = new Penyimpanan();
+        $petugas = Petugas::find()->where(['user_id' => Yii::$app->user->identity->id])->one(); 
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
+            date_default_timezone_set("Asia/Jakarta");
+
+            $model->koperasi_id = $_SESSION['koperasi_id'];
+            $model->petugas_id = $petugas->petugas_id;
+            $model->tgl_transaksi = date("Y-m-d H:i:s");
+
+            $model->save();
             return $this->redirect(['view', 'id' => $model->penyimpanan_id]);
         }
 
@@ -86,7 +95,11 @@ class PenyimpananController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
+            date_default_timezone_set("Asia/Jakarta");
+            $model->tgl_transaksi = date("Y-m-d H:i:s");
+
+            $model->save();
             return $this->redirect(['view', 'id' => $model->penyimpanan_id]);
         }
 
