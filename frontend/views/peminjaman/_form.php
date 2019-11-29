@@ -6,6 +6,7 @@ use yii\helpers\ArrayHelper;
 use frontend\models\Anggota;
 use frontend\models\CustomSimpanPinjam;
 use dosamigos\datepicker\DatePicker;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Peminjaman */
@@ -14,6 +15,9 @@ use dosamigos\datepicker\DatePicker;
 
 <?php 
 $jaminan = CustomSimpanPinjam::find()->where(['koperasi_id' => $_SESSION['koperasi_id']])->one();
+$anggota = Anggota::find()->all();
+$data = ArrayHelper::map($anggota, 'anggota_id', 'name'); 
+
 ?>
 
 <div class="peminjaman-form">
@@ -23,9 +27,13 @@ $jaminan = CustomSimpanPinjam::find()->where(['koperasi_id' => $_SESSION['kopera
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'anggota_id')->dropDownList(
-                ArrayHelper::map(Anggota::find()->all(), 'anggota_id', 'name'),["prompt"=>"nama anggota"])->label('Anggota')
-        ?>
+        <?= $form->field($model, 'anggota_id')->widget(Select2::classname(), [
+            'data' => $data,
+            'options' => ['placeholder' => 'Pilih Anggota ...'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ])->label('Anggota'); ?>
 
         <!-- <?= $form->field($model, 'koperasi_id')->textInput() ?> -->
 

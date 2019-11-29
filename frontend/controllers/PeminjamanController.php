@@ -76,7 +76,7 @@ class PeminjamanController extends Controller
 
             $jaminanKendaraan = new JaminanKendaraan();
             $jaminanKendaraan->nama_pemilik = $model->nama_pemilik_kendaraan;
-            $jaminanKendaraan->no_polisi = $model->nama_pemilik_kendaraan;
+            $jaminanKendaraan->no_polisi = $model->no_polisi_kendaraan;
             $jaminanKendaraan->merk = $model->merk_kendaraan;
             $jaminanKendaraan->tahun_pembuatan = $model->tahun_pembuatan_kendaraan;
             $jaminanKendaraan->warna = $model->warna_kendaraan;
@@ -97,7 +97,7 @@ class PeminjamanController extends Controller
             $model->jaminan_kendaraan_id = $jaminanKendaraan->jaminan_kendaraan_id;
             $model->save();
             return $this->redirect(['index']);
-        }
+        }   
 
         return $this->render('create', [
             'model' => $model,
@@ -114,11 +114,41 @@ class PeminjamanController extends Controller
     public function actionUpdate($id)
     {
         $this->layout = 'main-3';
-        $model = $this->findModel($id);
+        $model = $this->findModel($id);        
+        $jaminanKendaraan = JaminanKendaraan::find()->where(['jaminan_kendaraan_id' => $model->jaminan_kendaraan_id])->one();
+        $model->nama_pemilik_kendaraan = $jaminanKendaraan->nama_pemilik;
+        $model->no_polisi_kendaraan = $jaminanKendaraan->no_polisi;
+        $model->merk_kendaraan = $jaminanKendaraan->merk;
+        $model->tahun_pembuatan_kendaraan = $jaminanKendaraan->tahun_pembuatan;
+        $model->warna_kendaraan = $jaminanKendaraan->warna;
+        $model->nilai_harga_kendaraan = $jaminanKendaraan->nilai_harga;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->peminjaman_id]);
+        $jaminanTanahBangunan = JaminanTanahBangunan::find()->where(['jaminan_tanah_bangunan_id' => $model->jaminan_tanah_bangunan_id])->one();
+        $model->nama_pemilik_bangunan = $jaminanTanahBangunan->nama_pemilik;;
+        $model->no_bangunan = $jaminanTanahBangunan->no;
+        $model->status_hak_milik_bangunan = $jaminanTanahBangunan->status_hak_milik;
+        $model->luas_bangunan = $jaminanTanahBangunan->luas;
+
+        if ($model->load(Yii::$app->request->post())) {
+            $jaminanKendaraan->nama_pemilik = $model->nama_pemilik_kendaraan;
+            $jaminanKendaraan->no_polisi = $model->no_polisi_kendaraan;
+            $jaminanKendaraan->merk = $model->merk_kendaraan;
+            $jaminanKendaraan->tahun_pembuatan = $model->tahun_pembuatan_kendaraan;
+            $jaminanKendaraan->warna = $model->warna_kendaraan;
+            $jaminanKendaraan->nilai_harga = $model->nilai_harga_kendaraan;
+            $jaminanKendaraan->save(false);
+
+
+            $jaminanTanahBangunan->nama_pemilik = $model->nama_pemilik_bangunan;
+            $jaminanTanahBangunan->no = $model->no_bangunan;
+            $jaminanTanahBangunan->status_hak_milik = $model->status_hak_milik_bangunan;
+            $jaminanTanahBangunan->luas = $model->luas_bangunan;
+            $jaminanTanahBangunan->save(false);
+
+            $model->save();
+            return $this->redirect(['index']);
         }
+
 
         return $this->render('update', [
             'model' => $model,

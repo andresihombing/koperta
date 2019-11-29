@@ -95,5 +95,13 @@ class Peminjaman extends \yii\db\ActiveRecord
     public function getKoperasi()
     {
         return $this->hasOne(Koperasi::className(), ['koperasi_id' => 'koperasi_id']);
+    } 
+
+    public function getJaminanKendaraan(){
+        return $this->hasOne(JaminanKendaraan::className(), ['jaminan_kendaraan_id' => 'jaminan_kendaraan_id']);
+    }
+
+    public function getJaminanTanahBangunan(){
+        return $this->hasOne(JaminanTanahBangunan::className(), ['jaminan_tanah_bangunan_id' => 'jaminan_tanah_bangunan_id']);
     }
 }

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use lo\widgets\Toggle;
 
-$this->title = "Koperasi - Fitur";
+$this->title = "Kustomisasi Koperasi Anda";
 $this->params['breadcrumbs'][] = ['label' => 'Peminjaman', 'url' => ['koperasi/dashboard', 'id' => $model->koperasi_id]];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -12,8 +12,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="fitur-koperasi">
+ 
+    <h2><?= Html::encode($this->title) ?></h2><hr style="background: #898e94; height: 5px; border-color : transparent;" />
 
-    <h2><?= Html::encode($this->title) ?></h2><hr>
 
     <?php $form = ActiveForm::begin() ?>
 
