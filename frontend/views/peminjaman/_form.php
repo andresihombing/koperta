@@ -113,6 +113,18 @@ $data = ArrayHelper::map($anggota, 'anggota_id', 'name');
             <?= $form->field($model, 'status_hak_milik_bangunan')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'luas_bangunan')->textInput() ?>
+        <?php } ?> 
+
+        <!-- jaminan tanah tanah -->        
+        <?php if ($jaminan->tanah == 1) { ?>
+        <br><br><h4 class="text-center">Jaminan Tanah</h4><hr>
+            <?= $form->field($model, 'nama_pemilik_tanah')->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'no_tanah')->textInput() ?>
+
+            <?= $form->field($model, 'status_hak_milik_tanah')->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'luas_tanah')->textInput() ?>
         <?php } ?>    
     </div>
 

@@ -29,8 +29,8 @@ class CustomSimpanPinjam extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tanah_bangunan', 'jenis_kendaraan', 'surat_keterangan', 'koperasi_id'], 'required'],
-            [['tanah_bangunan', 'jenis_kendaraan', 'surat_keterangan', 'koperasi_id'], 'integer'],
+            [['tanah_bangunan', 'jenis_kendaraan', 'surat_keterangan', 'tanah', 'koperasi_id'], 'required'],
+            [['tanah_bangunan', 'jenis_kendaraan', 'surat_keterangan', 'tanah', 'koperasi_id'], 'integer'],
         ];
     }
 

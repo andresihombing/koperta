@@ -94,9 +94,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'edit' => function ($url, $model){
                                     return ToolsColumn::renderCustomButton($url, $model, 'Edit Transaksi', 'glyphicon glyphicon-pencil');
                                 },
-                                'delete' => function ($url, $model){
-                                    return ToolsColumn::renderCustomButton($url, $model, 'Hapus Transaksi', 'glyphicon glyphicon-trash');
-                                },
+                                // 'delete' => function ($url, $model){
+                                //     return ToolsColumn::renderCustomButton($url, $model, 'Hapus Transaksi', 'glyphicon glyphicon-trash');
+                                // },
                             ],
                             'urlCreator' => function ($action, $model, $key, $index){
                                 if ($action === 'view') {

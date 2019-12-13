@@ -3,17 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\Penyimpanan;
-use frontend\models\search\PenyimpananSearch;
-use frontend\models\Petugas;
+use frontend\models\JaminanTanah;
+use frontend\models\search\JaminanTanahSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PenyimpananController implements the CRUD actions for Penyimpanan model.
+ * JaminanTanahController implements the CRUD actions for JaminanTanah model.
  */
-class PenyimpananController extends Controller
+class JaminanTanahController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -31,13 +30,12 @@ class PenyimpananController extends Controller
     }
 
     /**
-     * Lists all Penyimpanan models.
+     * Lists all JaminanTanah models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $this->layout = 'main-3';
-        $searchModel = new PenyimpananSearch();
+        $searchModel = new JaminanTanahSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,39 +45,29 @@ class PenyimpananController extends Controller
     }
 
     /**
-     * Displays a single Penyimpanan model.
+     * Displays a single JaminanTanah model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        $this->layout = 'main-3';
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Penyimpanan model.
+     * Creates a new JaminanTanah model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $this->layout = 'main-3';
-        $model = new Penyimpanan();
-        $petugas = Petugas::find()->where(['user_id' => Yii::$app->user->identity->id])->one(); 
+        $model = new JaminanTanah();
 
-        if ($model->load(Yii::$app->request->post()) ) {
-            date_default_timezone_set("Asia/Jakarta");
-
-            $model->koperasi_id = $_SESSION['koperasi_id'];
-            $model->petugas_id = $petugas->petugas_id;
-            $model->tgl_transaksi = date("Y-m-d H:i:s");
-
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->penyimpanan_id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->jaminan_bangunan_id]);
         }
 
         return $this->render('create', [
@@ -88,7 +76,7 @@ class PenyimpananController extends Controller
     }
 
     /**
-     * Updates an existing Penyimpanan model.
+     * Updates an existing JaminanTanah model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,15 +84,10 @@ class PenyimpananController extends Controller
      */
     public function actionUpdate($id)
     {
-        $this->layout = 'main-3';
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) ) {
-            date_default_timezone_set("Asia/Jakarta");
-            $model->tgl_transaksi = date("Y-m-d H:i:s");
-
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->penyimpanan_id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->jaminan_bangunan_id]);
         }
 
         return $this->render('update', [
@@ -113,7 +96,7 @@ class PenyimpananController extends Controller
     }
 
     /**
-     * Deletes an existing Penyimpanan model.
+     * Deletes an existing JaminanTanah model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -122,21 +105,20 @@ class PenyimpananController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        echo $id;die();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Penyimpanan model based on its primary key value.
+     * Finds the JaminanTanah model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Penyimpanan the loaded model
+     * @return JaminanTanah the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Penyimpanan::findOne($id)) !== null) {
+        if (($model = JaminanTanah::findOne($id)) !== null) {
             return $model;
         }
 

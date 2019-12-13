@@ -22,6 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $form->field($model, 'jenis_kendaraan')->widget(Toggle::className()); ?>
 
+    <?= $form->field($model, 'tanah')->widget(Toggle::className()); ?>
+
     <div class="form-group">
         <?= Html::a("Batal", ['koperasi/dashboard', 'id' => $id], ['class' => 'btn btn-danger']) ?>
         <?= Html::submitButton('Simpan Kustomisasi', ['class' => 'btn btn-success']) ?>
