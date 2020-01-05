@@ -29,8 +29,13 @@ class CustomSimpanPinjam extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tanah_bangunan', 'jenis_kendaraan', 'surat_keterangan', 'tanah', 'koperasi_id'], 'required'],
-            [['tanah_bangunan', 'jenis_kendaraan', 'surat_keterangan', 'tanah', 'koperasi_id'], 'integer'],
+            [['bunga_penyimpanan', 'bunga_peminjaman', 
+                'mingguan', 'bulanan', 'tanah', 'bangunan', 
+                'jenis_kendaraan', 'surat_keterangan', 
+                'koperasi_id'], 'required'],
+            
+            [['mingguan', 'bulanan', 'tanah', 'bangunan', 'jenis_kendaraan', 'surat_keterangan', 'koperasi_id'], 'integer'],
+            [['bunga_penyimpanan', 'bunga_peminjaman'], 'double']
         ];
     }
 
@@ -42,7 +47,7 @@ class CustomSimpanPinjam extends \yii\db\ActiveRecord
         return [
             'simpan_pinjam_id' => 'Simpan Pinjam ID',
             'tanah_bangunan' => 'Tanah Bangunan',
-            'jenis_kendaraan' => 'Jenis Kendaraan',
+            'jenis_kendaraan' => 'Kendaraan',
             'surat_keterangan' => 'Surat Keterangan',
             'koperasi_id' => 'Koperasi ID',
         ];
