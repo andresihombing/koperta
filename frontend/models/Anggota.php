@@ -38,7 +38,7 @@ class Anggota extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['koperasi_id', 'user_id', 'name', 'dob', 'no_ktp', 'alamat_lengkap', 'status', 'perkawinan_ke', 'jumlah_anak'], 'required'],
+            [['koperasi_id', 'user_id', 'name','surname', 'dob', 'no_ktp', 'alamat_lengkap', 'status', 'perkawinan_ke', 'jumlah_anak'], 'required'],
             [['koperasi_id', 'no_ktp', 'perkawinan_ke', 'jumlah_anak'], 'integer'],
             [['dob'], 'safe'],
             [['name', 'alamat_lengkap'], 'string', 'max' => 500],

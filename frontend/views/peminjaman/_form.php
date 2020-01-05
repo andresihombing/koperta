@@ -7,17 +7,19 @@ use frontend\models\Anggota;
 use frontend\models\CustomSimpanPinjam;
 use dosamigos\datepicker\DatePicker;
 use kartik\select2\Select2;
+use yii\widgets\MaskedInputAsset;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Peminjaman */
 /* @var $form yii\widgets\ActiveForm */
+MaskedInputAsset::register($this);
 ?>
 
 <?php 
 $jaminan = CustomSimpanPinjam::find()->where(['koperasi_id' => $_SESSION['koperasi_id']])->one();
 $anggota = Anggota::find()->all();
 $data = ArrayHelper::map($anggota, 'anggota_id', 'name'); 
-
+$tipe = ['minggu' => 'Minggu', 'bulan' => 'Bulan'];
 ?>
 
 <div class="peminjaman-form">
@@ -38,6 +40,13 @@ $data = ArrayHelper::map($anggota, 'anggota_id', 'name');
         <!-- <?= $form->field($model, 'koperasi_id')->textInput() ?> -->
 
         <?= $form->field($model, 'tujuan_kredit')->textarea(['rows' => 6]) ?>
+        
+
+        <?= $form->field($model, 'tipe_angsuran')->dropDownList(['minggu' => 'Minggu', 'bulan' => 'Bulan'],['prompt'=>'Pilih Tipe'])?>
+
+        <?= $form->field($model, 'lama_angsuran')->textInput([
+            'type' => 'number'  
+        ]) ?>
 
         <?= $form->field($model, 'nilai_permohonan')->textInput() ?>
 
@@ -137,3 +146,75 @@ $data = ArrayHelper::map($anggota, 'anggota_id', 'name');
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php 
+    $this->registerJs(" 
+        var nilaiPermohonan = $('#peminjaman-nilai_permohonan');
+        var angsuranKredit = $('#peminjaman-angsuran_kredit');
+        var lamaAngsuran = $('#peminjaman-lama_angsuran');
+        var totalSemuaAngsuran = $('#peminjaman-total_angsuran');
+
+        nilaiPermohonan.inputmask('currency', {radixPoint:'.', prefix: 'Rp ', 'autoUnmask' : true, removeMaskOnSubmit: true});
+        nilaiPermohonan.keypress(function(event){
+            isNumber(event);
+        });
+
+        angsuranKredit.inputmask('currency', {radixPoint:'.', prefix: 'Rp ', 'autoUnmask' : true, removeMaskOnSubmit: true});
+        angsuranKredit.keypress(function(event){
+            isNumber(event);
+        });
+
+        totalSemuaAngsuran.inputmask('currency', {radixPoint:'.', prefix: 'Rp ', 'autoUnmask' : true, removeMaskOnSubmit: true});
+        totalSemuaAngsuran.keypress(function(event){
+            isNumber(event);
+        });
+
+        function isNumber(event){
+            var charCode = event.which;
+            // backspace & delete
+            if (charCode == 46 || charCode == 8) {
+                // nothing
+            }else{
+                // dot(titik) & space(spasi)
+                if (charCode === 190 || charCode === 32) {
+                    event.preventDefault();
+                }
+                // other than number 0 - 9
+                if (charCode < 48 || charCode > 57) {
+                    event.preventDefault();
+                }
+            }
+            return true;
+        }
+
+        function calculateAngsuran(){
+            var bunga = nilaiPermohonan.val() * 0.02;
+            var lama = nilaiPermohonan.val() /  lamaAngsuran.val();
+
+            var total = bunga + lama;
+            var totalAngsuran = total * lamaAngsuran.val();            
+
+            angsuranKredit.val(Math.round(total));
+        }
+
+        function totAngsuran(){
+            var bunga = nilaiPermohonan.val() * 0.02;
+            var lama = nilaiPermohonan.val() /  lamaAngsuran.val();
+
+            var total = bunga + lama;
+            var totalAngsuran = total * lamaAngsuran.val();            
+
+            totalSemuaAngsuran.val(Math.round(totalAngsuran));
+        }
+
+        nilaiPermohonan.on('keyup', function() {
+            calculateAngsuran();
+        });
+
+        nilaiPermohonan.on('keyup', function() {
+            totAngsuran();
+        });
+
+
+    ", $this::POS_END);
+?>

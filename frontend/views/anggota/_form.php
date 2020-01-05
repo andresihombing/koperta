@@ -19,6 +19,8 @@ use dosamigos\datepicker\DatePicker;
 
             <?= $form->field($model, 'name')->textInput(['maxlength' => true])->label("Nama") ?>
 
+            <?= $form->field($model, 'surname')->textInput(['maxlength' => true])->label("Nama Panggilan") ?>
+
             <?= $form->field($model, 'email')->textInput() ?>
 
             <!-- <?= $form->field($model, 'dob')->textInput() ?> -->

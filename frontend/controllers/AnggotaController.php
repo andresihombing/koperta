@@ -90,8 +90,8 @@ class AnggotaController extends Controller
             $model->ktp = UploadedFile::getInstance($model, 'ktp');
 
             if ($model->ktp && $model->kk) {
-                $model->ktp->saveAs('uploads/' . $model->ktp->baseName . '.' . $model->ktp->extension);
-                $model->kk->saveAs('uploads/' . $model->kk->baseName . '.' . $model->kk->extension);
+                $model->ktp->saveAs('uploads/anggota/' . $model->ktp->baseName . '.' . $model->ktp->extension);
+                $model->kk->saveAs('uploads/anggota/' . $model->kk->baseName . '.' . $model->kk->extension);
             }
 
             $model->user_id = $user->id;
@@ -121,8 +121,43 @@ class AnggotaController extends Controller
         $this->layout = "main-3";
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $modelUser = User::find()->where(['id' => $model->user_id])->one();
+        $currentEmail = $modelUser->email;
+        $model->email = $currentEmail;
+        
+        $currentKK = $model->kk;
+        $currentKTP = $model->ktp;
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->kk = UploadedFile::getInstance($model, 'kk');
+            $model->ktp = UploadedFile::getInstance($model, 'ktp');
+
+            if ($model->ktp && $model->kk) {
+                $model->ktp->saveAs('uploads/anggota/' . $model->ktp->baseName . '.' . $model->ktp->extension);
+                $model->kk->saveAs('uploads/anggota/' . $model->kk->baseName . '.' . $model->kk->extension);
+                echo "Save File<br>";
+            }
+
+            //update ktp
+            if($model->ktp == ""){
+                $model->ktp = $currentKTP;
+            }
+
+            //update kk
+            if($model->kk == ""){
+                $model->kk = $currentKK;
+            }
+
+            //update email
+            if($currentEmail != $model->email){
+                $modelUser->email = $model->email;
+                $modelUser->save(false);
+            }
+            //save model
+            $model->save(false);
             return $this->redirect(['view', 'id' => $model->anggota_id]);
+            
         }
 
         return $this->render('update', [
