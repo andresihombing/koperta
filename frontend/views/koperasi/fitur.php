@@ -18,11 +18,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php $form = ActiveForm::begin() ?>
 
-    <?= $form->field($model, 'tanah_bangunan')->widget(Toggle::className()); ?>
+    <?= "<h3>Bunga</h3>" ?>
 
-    <?= $form->field($model, 'jenis_kendaraan')->widget(Toggle::className()); ?>
+    <?= $form->field($model, 'bunga_penyimpanan')->textInput(['maxLength' => true]) . "%" ?>
+
+    <?= $form->field($model, 'bunga_peminjaman')->textInput(['maxLength' => true]) . "%" ?>
+
+    <?= "<h3>Jenis Pinjaman</h3>" ?>
+
+    <?= $form->field($model, 'mingguan')->widget(Toggle::className()); ?>
+
+    <?= $form->field($model, 'bulanan')->widget(Toggle::className()); ?>
+
+    <?= "<h3>Jenis Jaminan</h3>" ?>
 
     <?= $form->field($model, 'tanah')->widget(Toggle::className()); ?>
+
+    <?= $form->field($model, 'bangunan')->widget(Toggle::className()); ?>
+
+    <?= $form->field($model, 'jenis_kendaraan')->widget(Toggle::className()); ?>
 
     <div class="form-group">
         <?= Html::a("Batal", ['koperasi/dashboard', 'id' => $id], ['class' => 'btn btn-danger']) ?>

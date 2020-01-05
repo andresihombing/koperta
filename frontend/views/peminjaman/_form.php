@@ -94,7 +94,7 @@ $tipe = ['minggu' => 'Minggu', 'bulan' => 'Bulan'];
     <div class="col-md-6">
 
     <!-- jaminan kendaraan -->
-        <?php if ($jaminan->tanah_bangunan == 1) { ?>
+        <?php if ($jaminan->jenis_kendaraan == 1) { ?>
         <h4 class="text-center">Jaminan Kendaraan</h4><hr>
             <?= $form->field($model, 'nama_pemilik_kendaraan')->textInput() ?>
 
@@ -109,12 +109,9 @@ $tipe = ['minggu' => 'Minggu', 'bulan' => 'Bulan'];
             <?= $form->field($model, 'nilai_harga_kendaraan')->textInput() ?>
         <?php } ?>    
 
-
-
-
         <!-- jaminan tanah bangunan -->        
-        <?php if ($jaminan->jenis_kendaraan == 1) { ?>
-        <br><br><h4 class="text-center">Jaminan Tanah dan Bangunan</h4><hr>
+        <?php if ($jaminan->bangunan == 1) { ?>
+        <br><br><h4 class="text-center">Jaminan Bangunan</h4><hr>
             <?= $form->field($model, 'nama_pemilik_bangunan')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'no_bangunan')->textInput() ?>
