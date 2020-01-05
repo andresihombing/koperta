@@ -35,8 +35,6 @@ $data = ArrayHelper::map($anggota, 'anggota_id', 'name');
             ],
         ])->label('Anggota'); ?>
 
-        <!-- <?= $form->field($model, 'koperasi_id')->textInput() ?> -->
-
         <?= $form->field($model, 'tujuan_kredit')->textarea(['rows' => 6]) ?>
 
         <?= $form->field($model, 'nilai_permohonan')->textInput() ?>
@@ -58,12 +56,6 @@ $data = ArrayHelper::map($anggota, 'anggota_id', 'name');
         <?= $form->field($model, 'biaya_pengeluaran')->textInput() ?>
 
         <?= $form->field($model, 'pendapatan_bersih')->textInput() ?>
-
-        <!-- <?= $form->field($model, 'jaminan_tanah_bangunan_id')->textInput() ?>
-
-        <?= $form->field($model, 'jaminan_kendaraan_id')->textInput() ?>
-
-        <?= $form->field($model, 'jaminan_sk_id')->textInput() ?> -->
 
         <?= $form->field($model, 'banyak_pinjaman')->textInput() ?>
 

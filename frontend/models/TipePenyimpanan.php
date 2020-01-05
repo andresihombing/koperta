@@ -19,7 +19,7 @@ class TipePenyimpanan extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'tipe_penyimpanan';
+        return 'penyimpanan_tipe';
     }
 
     /**
