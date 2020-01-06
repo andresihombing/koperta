@@ -3,8 +3,8 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\JaminanTanahBangunan;
-use frontend\models\search\JaminanTanahBangunanSearch;
+use frontend\models\JaminanBangunan;
+use frontend\models\search\JaminanBangunanSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

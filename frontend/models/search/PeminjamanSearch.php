@@ -17,7 +17,7 @@ class PeminjamanSearch extends Peminjaman
     public function rules()
     {
         return [
-            [['peminjaman_id', 'anggota_id', 'koperasi_id', 'nilai_permohonan', 'angsuran_kredit', 'total_angsuran', 'pendapatan_sampingan', 'total_pendapatan_kotor', 'biaya_pengeluaran', 'pendapatan_bersih', 'jaminan_tanah_bangunan_id', 'jaminan_kendaraan_id', 'jaminan_sk_id', 'banyak_pinjaman', 'plafon_terakhir'], 'integer'],
+            [['peminjaman_id', 'anggota_id', 'koperasi_id', 'nilai_permohonan', 'angsuran_kredit', 'total_angsuran', 'pendapatan_sampingan', 'total_pendapatan_kotor', 'biaya_pengeluaran', 'pendapatan_bersih', 'jaminan_bangunan_id', 'jaminan_kendaraan_id', 'jaminan_tanah_id', 'banyak_pinjaman', 'plafon_terakhir'], 'integer'],
             [['tujuan_kredit', 'pekerjaan_utama', 'pekerjaan_sampingan', 'biaya_lainnya', 'tanggal_pelunasan'], 'safe'],
         ];
     }
@@ -68,9 +68,9 @@ class PeminjamanSearch extends Peminjaman
             'total_pendapatan_kotor' => $this->total_pendapatan_kotor,
             'biaya_pengeluaran' => $this->biaya_pengeluaran,
             'pendapatan_bersih' => $this->pendapatan_bersih,
-            'jaminan_tanah_bangunan_id' => $this->jaminan_tanah_bangunan_id,
+            'jaminan_bangunan_id' => $this->jaminan_bangunan_id,
             'jaminan_kendaraan_id' => $this->jaminan_kendaraan_id,
-            'jaminan_sk_id' => $this->jaminan_sk_id,
+            'jaminan_tanah_id' => $this->jaminan_tanah_id,
             'banyak_pinjaman' => $this->banyak_pinjaman,
             'plafon_terakhir' => $this->plafon_terakhir,
             'tanggal_pelunasan' => $this->tanggal_pelunasan,

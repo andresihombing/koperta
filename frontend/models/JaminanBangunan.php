@@ -13,7 +13,7 @@ use Yii;
  * @property string $status_hak_milik
  * @property int $luas
  */
-class JaminanTanahBangunan extends \yii\db\ActiveRecord
+class JaminanBangunan extends \yii\db\ActiveRecord
 {
     // public $choices;
 
@@ -22,7 +22,7 @@ class JaminanTanahBangunan extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%jaminan_tanah_bangunan}}';
+        return 'jaminan_bangunan';
     }
 
     /**
@@ -31,11 +31,11 @@ class JaminanTanahBangunan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['jaminan_tanah_bangunan_id', 'nama_pemilik', 'no', 'status_hak_milik', 'luas'], 'required'],
-            [['jaminan_tanah_bangunan_id', 'no', 'luas'], 'integer'],
+            [['jaminan_bangunan_id', 'nama_pemilik', 'no', 'status_hak_milik', 'luas'], 'required'],
+            [['jaminan_bangunan_id', 'no', 'luas'], 'integer'],
             [['nama_pemilik', 'status_hak_milik'], 'string', 'max' => 250],
-            [['jaminan_tanah_bangunan_id'], 'unique'],
-            // [['koperasi_id'], 'exist', 'skipOnError' => true, 'targetClass' => Koperasi::className(), 'targetAttribute' => ['koperasi_id' => 'id']],
+            [['jaminan_bangunan_id'], 'unique'],
+            [['koperasi_id'], 'exist', 'skipOnError' => true, 'targetClass' => Koperasi::className(), 'targetAttribute' => ['koperasi_id' => 'id']],
         ];
     }
 

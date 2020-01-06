@@ -16,10 +16,13 @@ MaskedInputAsset::register($this);
 ?>
 
 <?php 
-$jaminan = CustomSimpanPinjam::find()->where(['koperasi_id' => $_SESSION['koperasi_id']])->one();
-$anggota = Anggota::find()->all();
-$data = ArrayHelper::map($anggota, 'anggota_id', 'name'); 
-$tipe = ['minggu' => 'Minggu', 'bulan' => 'Bulan'];
+    $jaminan = CustomSimpanPinjam::find()->where(['koperasi_id' => $_SESSION['koperasi_id']])->one();
+    $anggota = Anggota::find()->all();
+    $data = ArrayHelper::map($anggota, 'anggota_id', 'name'); 
+    $tipe = ['minggu' => 'Minggu', 'bulan' => 'Bulan'];
+    $bungaMingguan = $jaminan->bunga_peminjaman_mingguan;
+    $bungaBulanan = $jaminan->bunga_peminjaman_bulanan;
+    $labelAngsuran = ($jaminan->mingguan == 1) ? "Lama Angsuran (Minggu)" : "Lama Angsuran (Bulan)";
 ?>
 
 <div class="peminjaman-form">
@@ -33,48 +36,60 @@ $tipe = ['minggu' => 'Minggu', 'bulan' => 'Bulan'];
             'data' => $data,
             'options' => ['placeholder' => 'Pilih Anggota ...'],
             'pluginOptions' => [
+            
                 'allowClear' => true
             ],
         ])->label('Anggota'); ?>
 
         <?= $form->field($model, 'tujuan_kredit')->textarea(['rows' => 6]) ?>
-        
 
-        <?= $form->field($model, 'tipe_angsuran')->dropDownList(['minggu' => 'Minggu', 'bulan' => 'Bulan'],['prompt'=>'Pilih Tipe'])?>
+        <?php 
+            if($jaminan->mingguan == 1 && $jaminan->bulanan == 1) {
+                echo $form->field($model, 'tipe_angsuran')->dropDownList(['minggu' => 'Minggu', 'bulan' => 'Bulan'],['prompt'=>'Pilih Tipe']);
+            }else{
+                $form->field($model, 'tipe_angsuran')->dropDownList(['minggu' => 'Minggu', 'bulan' => 'Bulan'],['prompt'=>'Pilih Tipe', 'required' => 'false']);
+            }
+        ?>
 
-        <?= $form->field($model, 'lama_angsuran')->textInput([
-            'type' => 'number'  
-        ]) ?>
+        <?php 
+            if($jaminan->mingguan == 1 && $jaminan->bulanan == 1) {
+                echo $form->field($model, 'lama_angsuran')->textInput(['type' => 'number']);
+            }else{
+                echo $form->field($model, 'lama_angsuran')->textInput(['type' => 'number'])->label($labelAngsuran);
+            }
+        ?>
 
         <?= $form->field($model, 'nilai_permohonan')->textInput() ?>
 
-        <?= $form->field($model, 'angsuran_kredit')->textInput() ?>
+        <?= $form->field($model, 'angsuran_kredit')->textInput(['readonly' => true]) ?>
 
-        <?= $form->field($model, 'total_angsuran')->textInput() ?>
+        <?= $form->field($model, 'total_angsuran')->textInput(['readonly' => true]) ?>
 
         <?= $form->field($model, 'pekerjaan_utama')->textInput(['maxlength' => true]) ?>
 
         <?= $form->field($model, 'pekerjaan_sampingan')->textInput(['maxlength' => true]) ?>
+        
+        <?= $form->field($model, 'pendapatan_usaha')->textInput(['maxlength' => true]) ?>
 
         <?= $form->field($model, 'pendapatan_sampingan')->textInput() ?>
 
-        <?= $form->field($model, 'total_pendapatan_kotor')->textInput() ?>
+        <?= $form->field($model, 'total_pendapatan_kotor')->textInput(['readonly' => true]) ?>
 
         <?= $form->field($model, 'biaya_lainnya')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'biaya_pengeluaran')->textInput() ?>
+        <?= $form->field($model, 'biaya_pengeluaran')->textInput(['readonly' => true]) ?>
 
-        <?= $form->field($model, 'pendapatan_bersih')->textInput() ?>
+        <?= $form->field($model, 'pendapatan_bersih')->textInput(['readonly' => true]) ?>
 
         <?= $form->field($model, 'banyak_pinjaman')->textInput() ?>
 
-        <?= $form->field($model, 'plafon_terakhir')->textInput() ?>
+        <?= $form->field($model, 'plafon_terakhir')->textInput(['readonly' => true]) ?>
 
         <b>Tanggal Pelunasan</b>
         <?= DatePicker::widget([
-        'model' => $model,
-        'attribute' => 'tanggal_pelunasan',    
-        'template' => '{addon}{input}',
+            'model' => $model,
+            'attribute' => 'tanggal_pelunasan',    
+            'template' => '{addon}{input}',
             'clientOptions' => [
                 'autoclose' => true,
                 'format' => 'yyyy-mm-dd'
@@ -137,26 +152,105 @@ $tipe = ['minggu' => 'Minggu', 'bulan' => 'Bulan'];
 </div>
 
 <?php 
-    $this->registerJs(" 
+    $js = <<< JS
         var nilaiPermohonan = $('#peminjaman-nilai_permohonan');
         var angsuranKredit = $('#peminjaman-angsuran_kredit');
         var lamaAngsuran = $('#peminjaman-lama_angsuran');
         var totalSemuaAngsuran = $('#peminjaman-total_angsuran');
+        var tipeAngsuran = $('#peminjaman-tipe_angsuran');
+        var pendapatanSampingan = $('#peminjaman-pendapatan_sampingan');
+        var totalPendapatanKotor = $('#peminjaman-total_pendapatan_kotor');
+        var biayaLainnya = $('#peminjaman-biaya_lainnya');
+        var totalBiayaLainnya = $('#peminjaman-biaya_pengeluaran');
+        var pendapatanBersih = $('#peminjaman-pendapatan_bersih');
+        var pendapatanUsaha = $('#peminjaman-pendapatan_usaha');
+        var plafonTerakhir = $('#peminjaman-plafon_terakhir');
+        var besarBunga = 0;
+        
+        if(tipeAngsuran.length) {
+            tipeAngsuran.change(function() {
+                if(tipeAngsuran.val() == 'minggu')
+                    besarBunga = $bungaMingguan;
+                else
+                    besarBunga = $bungaBulanan;
+            })
+        }else{
+            if($jaminan->mingguan == 1)
+                besarBunga = $bungaMingguan;
+            else
+                besarBunga = $bungaBulanan;
+        }
 
-        nilaiPermohonan.inputmask('currency', {radixPoint:'.', prefix: 'Rp ', 'autoUnmask' : true, removeMaskOnSubmit: true});
+        nilaiPermohonan.inputmask('currency', {radixPoint:'.', prefix: 'Rp. ', 'autoUnmask' : true, removeMaskOnSubmit: true});
         nilaiPermohonan.keypress(function(event){
             isNumber(event);
         });
 
-        angsuranKredit.inputmask('currency', {radixPoint:'.', prefix: 'Rp ', 'autoUnmask' : true, removeMaskOnSubmit: true});
+        angsuranKredit.inputmask('currency', {radixPoint:'.', prefix: 'Rp. ', 'autoUnmask' : true, removeMaskOnSubmit: true});
         angsuranKredit.keypress(function(event){
             isNumber(event);
         });
 
-        totalSemuaAngsuran.inputmask('currency', {radixPoint:'.', prefix: 'Rp ', 'autoUnmask' : true, removeMaskOnSubmit: true});
+        totalSemuaAngsuran.inputmask('currency', {radixPoint:'.', prefix: 'Rp. ', 'autoUnmask' : true, removeMaskOnSubmit: true});
         totalSemuaAngsuran.keypress(function(event){
             isNumber(event);
         });
+
+        pendapatanSampingan.inputmask('currency', {radixPoint:'.', prefix: 'Rp. ', 'autoUnmask' : true, removeMaskOnSubmit: true});
+        pendapatanSampingan.keypress(function(event){
+            isNumber(event);
+        });
+
+        totalPendapatanKotor.inputmask('currency', {radixPoint:'.', prefix: 'Rp. ', 'autoUnmask' : true, removeMaskOnSubmit: true});
+        totalPendapatanKotor.keypress(function(event){
+            isNumber(event);
+        });
+
+        biayaLainnya.inputmask('currency', {radixPoint:'.', prefix: 'Rp. ', 'autoUnmask' : true, removeMaskOnSubmit: true});
+        biayaLainnya.keypress(function(event){
+            isNumber(event);
+        });
+
+        totalBiayaLainnya.inputmask('currency', {radixPoint:'.', prefix: 'Rp. ', 'autoUnmask' : true, removeMaskOnSubmit: true});
+        totalBiayaLainnya.keypress(function(event){
+            isNumber(event);
+        });
+
+        pendapatanBersih.inputmask('currency', {radixPoint:'.', prefix: 'Rp. ', 'autoUnmask' : true, removeMaskOnSubmit: true});
+        pendapatanBersih.keypress(function(event){
+            isNumber(event);
+        });
+
+        pendapatanUsaha.inputmask('currency', {radixPoint:'.', prefix: 'Rp. ', 'autoUnmask' : true, removeMaskOnSubmit: true});
+        pendapatanUsaha.keypress(function(event){
+            isNumber(event);
+        });
+
+        plafonTerakhir.inputmask('currency', {radixPoint:'.', prefix: 'Rp. ', 'autoUnmask' : true, removeMaskOnSubmit: true});
+        plafonTerakhir.keypress(function(event){
+            isNumber(event);
+        });
+
+        nilaiPermohonan.on('keyup', function() {
+            calculateAngsuran();
+        });
+
+        nilaiPermohonan.on('keyup', function() {
+            totAngsuran();
+        });
+
+        biayaLainnya.on('keyup', function(){
+            totalBiayaLainnya.val(biayaLainnya.val())
+            subTotalPendapatanBersih();
+        })
+
+        pendapatanUsaha.on('keyup', function(){
+            totalKotor();
+        })
+
+        pendapatanSampingan.on('keyup', function(){
+            totalKotor();
+        })
 
         function isNumber(event){
             var charCode = event.which;
@@ -177,7 +271,7 @@ $tipe = ['minggu' => 'Minggu', 'bulan' => 'Bulan'];
         }
 
         function calculateAngsuran(){
-            var bunga = nilaiPermohonan.val() * 0.02;
+            var bunga = nilaiPermohonan.val() * (besarBunga / 100);
             var lama = nilaiPermohonan.val() /  lamaAngsuran.val();
 
             var total = bunga + lama;
@@ -187,7 +281,7 @@ $tipe = ['minggu' => 'Minggu', 'bulan' => 'Bulan'];
         }
 
         function totAngsuran(){
-            var bunga = nilaiPermohonan.val() * 0.02;
+            var bunga = nilaiPermohonan.val() * (besarBunga / 100);
             var lama = nilaiPermohonan.val() /  lamaAngsuran.val();
 
             var total = bunga + lama;
@@ -196,14 +290,19 @@ $tipe = ['minggu' => 'Minggu', 'bulan' => 'Bulan'];
             totalSemuaAngsuran.val(Math.round(totalAngsuran));
         }
 
-        nilaiPermohonan.on('keyup', function() {
-            calculateAngsuran();
-        });
+        function subTotalPendapatanBersih(){
+            var tot = totalPendapatanKotor.val() - totalBiayaLainnya.val();
+            
+            pendapatanBersih.val(Math.round(tot));
+        }
 
-        nilaiPermohonan.on('keyup', function() {
-            totAngsuran();
-        });
+        function totalKotor(){
+            var tot = Number(pendapatanUsaha.val()) + Number(pendapatanSampingan.val());
+            console.log(tot);
+            totalPendapatanKotor.val(Math.round(tot));
+        }
+        
+    JS;
 
-
-    ", $this::POS_END);
+    $this->registerJs($js, $this::POS_END);
 ?>

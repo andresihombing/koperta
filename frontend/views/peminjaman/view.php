@@ -64,132 +64,142 @@ $jaminan = CustomSimpanPinjam::find()->where(['koperasi_id' => $_SESSION['kopera
         ]) ?>
     </div>
     <div class="col-md-6">
-        <?php if ($jaminan->jenis_kendaraan == 1) { ?>
-            <h4 class="text-center">Jaminan Kendaraan</h4><hr>
-            <?= DetailView::widget([
-                'model' => $model,
-                'attributes' => [
-                    // 'peminjaman_id',
-                     [
-                        'attribute' => 'nama_pemilik',
-                        'label' => 'Nama Pemilik',
-                        'value' => function($model){
-                            return $model->jaminanKendaraan->nama_pemilik;
-                        }
+        <?php 
+        if($model->jaminan_kendaraan_id != null) {
+            if ($jaminan->jenis_kendaraan == 1) {
+                echo '<h4 class="text-center">Jaminan Kendaraan</h4><hr>';
+                echo DetailView::widget([
+                    'model' => $model,
+                    'attributes' => [
+                        // 'peminjaman_id',
+                        [
+                            'attribute' => 'nama_pemilik',
+                            'label' => 'Nama Pemilik',
+                            'value' => function($model){
+                                return $model->jaminanKendaraan->nama_pemilik;
+                            }
+                        ],
+                        [
+                            'attribute' => 'no_polisi',
+                            'label' => 'Nomor polisi',
+                            'value' => function($model){
+                                return $model->jaminanKendaraan->no_polisi;
+                            }
+                        ],
+                        [
+                            'attribute' => 'merk',
+                            'label' => 'Merk',
+                            'value' => function($model){
+                                return $model->jaminanKendaraan->merk;
+                            }
+                        ],
+                        [
+                            'attribute' => 'tahun_pembuatan',
+                            'label' => 'Tahun Pembuatan',
+                            'value' => function($model){
+                                return $model->jaminanKendaraan->tahun_pembuatan;
+                            }
+                        ],
+                        [
+                            'attribute' => 'warna',
+                            'label' => 'Warna',
+                            'value' => function($model){
+                                return $model->jaminanKendaraan->warna;
+                            }
+                        ],
+                        [
+                            'attribute' => 'nilai_harga',
+                            'label' => 'Nilai Harga',
+                            'value' => function($model){
+                                return $model->jaminanKendaraan->nilai_harga;
+                            }
+                        ],
                     ],
-                    [
-                        'attribute' => 'no_polisi',
-                        'label' => 'Nomor polisi',
-                        'value' => function($model){
-                            return $model->jaminanKendaraan->no_polisi;
-                        }
-                    ],
-                    [
-                        'attribute' => 'merk',
-                        'label' => 'Merk',
-                        'value' => function($model){
-                            return $model->jaminanKendaraan->merk;
-                        }
-                    ],
-                    [
-                        'attribute' => 'tahun_pembuatan',
-                        'label' => 'Tahun Pembuatan',
-                        'value' => function($model){
-                            return $model->jaminanKendaraan->tahun_pembuatan;
-                        }
-                    ],
-                    [
-                        'attribute' => 'warna',
-                        'label' => 'Warna',
-                        'value' => function($model){
-                            return $model->jaminanKendaraan->warna;
-                        }
-                    ],
-                    [
-                        'attribute' => 'nilai_harga',
-                        'label' => 'Nilai Harga',
-                        'value' => function($model){
-                            return $model->jaminanKendaraan->nilai_harga;
-                        }
-                    ],
-                ],
-            ]) ?>
-        <?php } ?>
+                ]);
+            } 
+        } ?>
 
-        <?php if ($jaminan->tanah_bangunan == 1) { ?>
-            <h4 class="text-center">Jaminan Tanah Bangunan</h4><hr>
-            <?= DetailView::widget([
-                'model' => $model,
-                'attributes' => [
-                    // 'peminjaman_id',
-                     [
-                        'attribute' => 'nama_pemilik',
-                        'label' => 'Nama Pemilik',
-                        'value' => function($model){
-                            return $model->jaminanTanahBangunan->nama_pemilik;
-                        }
+        <?php
+        if($model->jaminan_bangunan_id != null) {
+            if ($jaminan->bangunan == 1) {
+                echo '<h4 class="text-center">Jaminan Bangunan</h4><hr>';
+                echo DetailView::widget([
+                    'model' => $model,
+                    'attributes' => [
+                        // 'peminjaman_id',
+                        [
+                            'attribute' => 'nama_pemilik',
+                            'label' => 'Nama Pemilik',
+                            'value' => function($model){
+                                return $model->jaminanBangunan->nama_pemilik;
+                            }
+                        ],
+                        [
+                            'attribute' => 'no',
+                            'label' => 'Nomor',
+                            'value' => function($model){
+                                return $model->jaminanBangunan->no;
+                            }
+                        ],
+                        [
+                            'attribute' => 'status_hak_milik',
+                            'label' => 'Status Hak Milik',
+                            'value' => function($model){
+                                return $model->jaminanBangunan->status_hak_milik;
+                            }
+                        ],
+                        [
+                            'attribute' => 'luas',
+                            'label' => 'Luas Bangunan',
+                            'value' => function($model){
+                                return $model->jaminanBangunan->luas;
+                            }
+                        ],
                     ],
-                    [
-                        'attribute' => 'no',
-                        'label' => 'Nomor',
-                        'value' => function($model){
-                            return $model->jaminanTanahBangunan->no;
-                        }
-                    ],
-                    [
-                        'attribute' => 'status_hak_milik',
-                        'label' => 'Status Hak Milik',
-                        'value' => function($model){
-                            return $model->jaminanTanahBangunan->status_hak_milik;
-                        }
-                    ],
-                    [
-                        'attribute' => 'luas',
-                        'label' => 'Tahun Pembuatan',
-                        'value' => function($model){
-                            return $model->jaminanTanahBangunan->luas;
-                        }
-                    ],
-                ],
-            ]) ?>
-        <?php } ?>
+                ]);
+            } 
+        } ?>
 
-        <?php if ($jaminan->tanah == 1) { ?>
-            <h4 class="text-center">Jaminan Tanah Bangunan</h4><hr>
-            <?= DetailView::widget([
-                'model' => $model,
-                'attributes' => [
-                    // 'peminjaman_id',
-                     [
-                        'attribute' => 'nama_pemilik',
-                        'label' => 'Nama Pemilik',
-                        'value' => function($model){
-                            return $model->jaminanTanah->nama_pemilik;
-                        }
-                    ],
-                    [
-                        'attribute' => 'no',
-                        'label' => 'Nomor',
-                        'value' => function($model){
-                            return $model->jaminanTanah->no;
-                        }
-                    ],
-                    [
-                        'attribute' => 'status_hak_milik',
-                        'label' => 'Status Hak Milik',
-                        'value' => function($model){
-                            return $model->jaminanTanah->status_hak_milik;
-                        }
-                    ],
-                    [
-                        'attribute' => 'luas',
-                        'label' => 'Tahun Pembuatan',
-                        'value' => function($model){
-                            return $model->jaminanTanah->luas;
-                        }
-                    ],
-                ],
-            ]) ?>
-        <?php } ?>
+        <?php 
+            if($model->jaminan_tanah_id != null){
+                if ($jaminan->tanah == 1) {
+                    echo '<h4 class="text-center">Jaminan Tanah</h4><hr>';
+                    echo DetailView::widget([
+                        'model' => $model,
+                        'attributes' => [
+                            // 'peminjaman_id',
+                            [
+                                'attribute' => 'nama_pemilik',
+                                'label' => 'Nama Pemilik',
+                                'value' => function($model){
+                                    return $model->jaminanTanah->nama_pemilik;
+                                }
+                            ],
+                            [
+                                'attribute' => 'no',
+                                'label' => 'Nomor',
+                                'value' => function($model){
+                                    return $model->jaminanTanah->no;
+                                }
+                            ],
+                            [
+                                'attribute' => 'status_hak_milik',
+                                'label' => 'Status Hak Milik',
+                                'value' => function($model){
+                                    return $model->jaminanTanah->status_hak_milik;
+                                }
+                            ],
+                            [
+                                'attribute' => 'luas',
+                                'label' => 'Luas Tanah',
+                                'value' => function($model){
+                                    return $model->jaminanTanah->luas;
+                                }
+                            ],
+                        ],
+                    ]);
+                }
+            }
+        ?>
     </div>
 </div>

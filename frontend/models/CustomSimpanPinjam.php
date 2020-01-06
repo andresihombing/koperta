@@ -29,13 +29,13 @@ class CustomSimpanPinjam extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['bunga_penyimpanan', 'bunga_peminjaman', 
+            [['bunga_penyimpanan', 'bunga_peminjaman_mingguan', 'bunga_peminjaman_bulanan',
                 'mingguan', 'bulanan', 'tanah', 'bangunan', 
                 'jenis_kendaraan', 'surat_keterangan', 
                 'koperasi_id'], 'required'],
             
             [['mingguan', 'bulanan', 'tanah', 'bangunan', 'jenis_kendaraan', 'surat_keterangan', 'koperasi_id'], 'integer'],
-            [['bunga_penyimpanan', 'bunga_peminjaman'], 'double']
+            [['bunga_penyimpanan', 'bunga_peminjaman_mingguan', 'bunga_peminjaman_bulanan'], 'double']
         ];
     }
 

@@ -18,17 +18,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php $form = ActiveForm::begin() ?>
 
-    <?= "<h3>Bunga</h3>" ?>
-
-    <?= $form->field($model, 'bunga_penyimpanan')->textInput(['maxLength' => true]) . "%" ?>
-
-    <?= $form->field($model, 'bunga_peminjaman')->textInput(['maxLength' => true]) . "%" ?>
-
     <?= "<h3>Jenis Pinjaman</h3>" ?>
 
     <?= $form->field($model, 'mingguan')->widget(Toggle::className()); ?>
 
     <?= $form->field($model, 'bulanan')->widget(Toggle::className()); ?>
+
+    <?= "<h3>Bunga</h3>" ?>
+
+    <?= $form->field($model, 'bunga_penyimpanan')->textInput(['maxLength' => true]) ?>
+
+    <?= $form->field($model, 'bunga_peminjaman_mingguan')->textInput(['maxLength' => true]) ?>
+
+    <?= $form->field($model, 'bunga_peminjaman_bulanan')->textInput(['maxLength' => true]) ?>
 
     <?= "<h3>Jenis Jaminan</h3>" ?>
 
@@ -54,25 +56,37 @@ $this->params['breadcrumbs'][] = $this->title;
         $(document).ready(function() {
             var tanahBangunan = $('.field-customsimpanpinjam-tanah_bangunan');
             var jenisKendaraan = $('.field-customsimpanpinjam-jenis_kendaraan');
+            var pinjamanMingguan = $('.field-customsimpanpinjam-mingguan');
+            var pinjamanBulanan = $('.field-customsimpanpinjam-bulanan');
+            var bungaMingguan = $('.field-customsimpanpinjam-bunga_peminjaman_mingguan');
+            var bungaBulanan = $('.field-customsimpanpinjam-bunga_peminjaman_bulanan');
             // var suratKeterangan = $('.field-customsimpanpinjam-surat_keterangan');
             
-            tanahBangunan.click(function() {
-                if(tanahBangunan.children().hasClass('btn-success')) { 
-                    console.log('off');
-                    tanahBangunanChoices.hide();
+            if(pinjamanMingguan.children().hasClass('btn-success')) { 
+                bungaMingguan.show();
+            } else {
+                bungaMingguan.hide();
+            }
+
+            if(pinjamanBulanan.children().hasClass('btn-success')) { 
+                bungaBulanan.show();
+            } else {
+                bungaBulanan.hide();
+            }
+
+            pinjamanMingguan.click(function() {
+                if(pinjamanMingguan.children().hasClass('btn-success')) { 
+                    bungaMingguan.hide();
                 } else {
-                    console.log('on');
-                    tanahBangunanChoices.show();
+                    bungaMingguan.show();
                 }
             });
 
-            jenisKendaraan.click(function() {
-                if(jenisKendaraan.children().hasClass('btn-success')) { 
-                    console.log('off');
-                    jenisKendaraanChoices.hide();
+            pinjamanBulanan.click(function() {
+                if(pinjamanBulanan.children().hasClass('btn-success')) { 
+                    bungaBulanan.hide();
                 } else {
-                    console.log('on');
-                    jenisKendaraanChoices.show();
+                    bungaBulanan.show();
                 }
             });
 

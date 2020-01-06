@@ -34,16 +34,19 @@ class Peminjaman extends \yii\db\ActiveRecord
     public $tahun_pembuatan_kendaraan;
     public $warna_kendaraan;
     public $nilai_harga_kendaraan;
+    
     //jaminan tanah bagunan
     public $nama_pemilik_bangunan;
     public $no_bangunan;
     public $status_hak_milik_bangunan;
     public $luas_bangunan;
+
     //jaminan tanah
     public $nama_pemilik_tanah;
     public $no_tanah;
     public $status_hak_milik_tanah;
     public $luas_tanah;
+
     /**
      * {@inheritdoc}
      */
@@ -51,20 +54,37 @@ class Peminjaman extends \yii\db\ActiveRecord
     {
         return '{{%peminjaman}}';
     }
+    
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['anggota_id', 'koperasi_id', 'tujuan_kredit', 'pekerjaan_utama', 'pekerjaan_sampingan', 'pendapatan_sampingan', 'total_pendapatan_kotor', 'biaya_lainnya', 'biaya_pengeluaran', 'pendapatan_bersih','banyak_pinjaman', 'plafon_terakhir', 'tanggal_pelunasan', 'tipe_angsuran', 'lama_angsuran'], 'required'],
-            [['anggota_id', 'koperasi_id', 'pendapatan_sampingan', 'total_pendapatan_kotor', 'biaya_pengeluaran', 'pendapatan_bersih', 'jaminan_tanah_bangunan_id', 'jaminan_kendaraan_id', 'jaminan_sk_id', 'jaminan_tanah_id' ,'banyak_pinjaman', 'plafon_terakhir'], 'integer'],
-            [['tujuan_kredit', 'nilai_permohonan', 'angsuran_kredit', 'total_angsuran'], 'string'],
-            [['tanggal_pelunasan', 'nama_pemilik_kendaraan', 'no_polisi_kendaraan', 'merk_kendaraan', 'tahun_pembuatan_kendaraan', 'warna_kendaraan', 'nilai_harga_kendaraan', 'nama_pemilik_bangunan', 'no_bangunan', 'status_hak_milik_bangunan', 'luas_bangunan', 'nama_pemilik_tanah', 'no_tanah', 'status_hak_milik_tanah', 'luas_tanah'], 'safe'],
+            [['anggota_id', 'koperasi_id', 'tujuan_kredit', 'pekerjaan_utama', 
+            'pekerjaan_sampingan', 'pendapatan_sampingan', 'total_pendapatan_kotor', 
+            'biaya_lainnya', 'biaya_pengeluaran', 'pendapatan_bersih','banyak_pinjaman', 
+            'plafon_terakhir', 'tanggal_pelunasan', 'lama_angsuran', 'pendapatan_usaha'], 'required'],
+
+            [['anggota_id', 'koperasi_id', 'jaminan_bangunan_id', 'jaminan_kendaraan_id', 
+            'jaminan_tanah_id', 'banyak_pinjaman'], 'integer'],
+            
+            [['tujuan_kredit', 'nilai_permohonan', 'angsuran_kredit', 'total_angsuran',
+             'pendapatan_sampingan', 'total_pendapatan_kotor', 'biaya_pengeluaran',
+              'pendapatan_bersih', 'pendapatan_usaha', 'plafon_terakhir'], 'string'],
+
+            [['tanggal_pelunasan', 'nama_pemilik_kendaraan', 'no_polisi_kendaraan', 
+            'merk_kendaraan', 'tahun_pembuatan_kendaraan', 'warna_kendaraan', 
+            'nilai_harga_kendaraan', 'nama_pemilik_bangunan', 'no_bangunan', 
+            'status_hak_milik_bangunan', 'luas_bangunan', 'nama_pemilik_tanah', 
+            'no_tanah', 'status_hak_milik_tanah', 'luas_tanah'], 'safe'],
+            
             [['pekerjaan_utama', 'pekerjaan_sampingan'], 'string', 'max' => 250],
+            
             [['biaya_lainnya'], 'string', 'max' => 500],
         ];
     }
+
     /**
      * {@inheritdoc}
      */
@@ -83,16 +103,17 @@ class Peminjaman extends \yii\db\ActiveRecord
             'pendapatan_sampingan' => 'Pendapatan Sampingan',
             'total_pendapatan_kotor' => 'Total Pendapatan Kotor',
             'biaya_lainnya' => 'Biaya Lainnya',
-            'biaya_pengeluaran' => 'Biaya Pengeluaran',
-            'pendapatan_bersih' => 'Pendapatan Bersih',
+            'biaya_pengeluaran' => 'Total Biaya Lainnya',
+            'pendapatan_bersih' => 'Sub Total Pendapatan Bersih',
             'jaminan_tanah_bangunan_id' => 'Jaminan Tanah Bangunan ID',
             'jaminan_kendaraan_id' => 'Jaminan Kendaraan ID',
             'jaminan_sk_id' => 'Jaminan Sk ID',
-            'banyak_pinjaman' => 'Banyak Pinjaman',
-            'plafon_terakhir' => 'Plafon Terakhir',
+            'banyak_pinjaman' => 'Sudah Berapa Kali Pinjam',
+            'plafon_terakhir' => 'Besar Plafon Terakhir',
             'tanggal_pelunasan' => 'Tanggal Pelunasan',
         ];
     }
+    
     public function getAnggota()
     {
         return $this->hasOne(Anggota::className(), ['anggota_id' => 'anggota_id']);

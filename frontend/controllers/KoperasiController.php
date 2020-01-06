@@ -6,7 +6,7 @@ use Yii;
 use frontend\models\Koperasi;
 use frontend\models\search\KoperasiSearch;
 use frontend\models\CustomSimpanPinjam;
-use frontend\models\JaminanTanahBangunan;
+use frontend\models\JaminanBangunan;
 use frontend\models\JaminanKendaraan;
 use frontend\models\Profile;
 use yii\web\Controller;
