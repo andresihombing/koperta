@@ -12,8 +12,6 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="penyimpanan">
 
-    <div class="container">
-
     	<div class="penyimpanan-space-between">
             <div>
                 <?= Html::a('Kembali', ['/penyimpanan/index'], ['class' => 'back-button btn btn-primary']) ?>
@@ -31,7 +29,4 @@ $this->params['breadcrumbs'][] = 'Update';
 		    ]) ?>
 
 		</div>
-
-	</div>
-
 </div>

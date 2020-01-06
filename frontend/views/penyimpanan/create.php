@@ -11,26 +11,22 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="penyimpanan">
 
-    <div class="container">
-
-    	<div class="penyimpanan-space-between">
-            <div>
-                <?= Html::a('Kembali', ['/penyimpanan/index'], ['class' => 'back-button btn btn-primary']) ?>
-            </div>
-
-            <div> 
-                <h3 style="line-height: 0">Tambah Transaksi Baru</h3>
-            </div>
+    <div class="penyimpanan-space-between">
+        <div>
+            <?= Html::a('Kembali', ['/penyimpanan/index'], ['class' => 'back-button btn btn-primary']) ?>
         </div>
 
-		<div class="box box-success penyimpanan-create">
+        <div> 
+            <h3 style="line-height: 0">Tambah Transaksi Baru</h3>
+        </div>
+    </div>
 
-		    <?= $this->render('_form', [
-		        'model' => $model,
-		    ]) ?>
+    <div class="box box-success penyimpanan-create">
 
-		</div>
+        <?= $this->render('_form', [
+            'model' => $model,
+        ]) ?>
 
-	</div>
+    </div>
 
 </div>

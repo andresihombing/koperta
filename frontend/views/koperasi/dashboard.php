@@ -8,8 +8,8 @@ use dosamigos\highcharts\HighCharts;
 /* @var $model frontend\models\Koperasi */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Koperasis', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = ['label' => 'Koperasis', 'url' => ['index']];
+// $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="koperasi-view">

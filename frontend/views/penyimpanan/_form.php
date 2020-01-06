@@ -6,10 +6,12 @@ use yii\helpers\ArrayHelper;
 use frontend\models\Anggota;
 use frontend\models\PenyimpananTipe;
 use kartik\select2\Select2;
+use yii\widgets\MaskedInputAsset;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Penyimpanan */
 /* @var $form yii\widgets\ActiveForm */
+MaskedInputAsset::register($this);
 ?>
 
 <div class="penyimpanan-form">
@@ -25,7 +27,7 @@ use kartik\select2\Select2;
             <div class="col-sm-10">
               <?= $form->field($model, 'anggota_id')->widget(Select2::classname(), 
                 [
-                    'data' => ArrayHelper::map(Anggota::find()->orderBy('name')->all(), 'anggota_id', 'name'),
+                    'data' => ArrayHelper::map(Anggota::find()->orderBy('name')->where(['koperasi_id' => $_SESSION['koperasi_id']])->all(), 'anggota_id', 'name'),
                     'options' => ['placeholder' => 'Pilih nasabah...'],
                     'pluginOptions' => [
                         'allowClear' => true
@@ -67,3 +69,35 @@ use kartik\select2\Select2;
 </div>
 
 
+<?php
+  $js = <<< JS
+
+    var besarTransaksi = $('#penyimpanan-nilai_transaksi');
+
+    besarTransaksi.inputmask('currency', {radixPoint:'.', prefix: 'Rp. ', 'autoUnmask' : true, removeMaskOnSubmit: true});
+    besarTransaksi.keypress(function(event){
+        isNumber(event);
+    });
+
+    function isNumber(event){
+            var charCode = event.which;
+            // backspace & delete
+            if (charCode == 46 || charCode == 8) {
+                // nothing
+            }else{
+                // dot(titik) & space(spasi)
+                if (charCode === 190 || charCode === 32) {
+                    event.preventDefault();
+                }
+                // other than number 0 - 9
+                if (charCode < 48 || charCode > 57) {
+                    event.preventDefault();
+                }
+            }
+            return true;
+        }
+
+  JS;
+
+  $this->registerJs($js, $this::POS_END);
+?>

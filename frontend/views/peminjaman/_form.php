@@ -17,7 +17,7 @@ MaskedInputAsset::register($this);
 
 <?php 
     $jaminan = CustomSimpanPinjam::find()->where(['koperasi_id' => $_SESSION['koperasi_id']])->one();
-    $anggota = Anggota::find()->all();
+    $anggota = Anggota::find()->where(['koperasi_id' => $_SESSION['koperasi_id']])->all();
     $data = ArrayHelper::map($anggota, 'anggota_id', 'name'); 
     $tipe = ['minggu' => 'Minggu', 'bulan' => 'Bulan'];
     $bungaMingguan = $jaminan->bunga_peminjaman_mingguan;
@@ -31,15 +31,28 @@ MaskedInputAsset::register($this);
         <h4 class="text-center">Data Peminjaman</h4><hr>
 
         <?php $form = ActiveForm::begin(); ?>
-
-        <?= $form->field($model, 'anggota_id')->widget(Select2::classname(), [
-            'data' => $data,
-            'options' => ['placeholder' => 'Pilih Anggota ...'],
-            'pluginOptions' => [
-            
-                'allowClear' => true
-            ],
-        ])->label('Anggota'); ?>
+        
+        <?php
+            if($model->anggota_id == null){
+                echo $form->field($model, 'anggota_id')->widget(Select2::classname(), [
+                    'data' => $data,
+                    'options' => ['placeholder' => 'Pilih Anggota ...'],
+                    'pluginOptions' => [
+                    
+                        'allowClear' => true
+                    ],
+                ])->label('Anggota');
+            }else{
+                $form->field($model, 'anggota_id')->widget(Select2::classname(), [
+                    'data' => $data,
+                    'options' => ['placeholder' => 'Pilih Anggota ...', 'disable' => true],
+                    'pluginOptions' => [
+                    
+                        'allowClear' => true
+                    ],
+                ])->label('Anggota');
+            }
+        ?>
 
         <?= $form->field($model, 'tujuan_kredit')->textarea(['rows' => 6]) ?>
 
@@ -83,7 +96,7 @@ MaskedInputAsset::register($this);
 
         <?= $form->field($model, 'banyak_pinjaman')->textInput() ?>
 
-        <?= $form->field($model, 'plafon_terakhir')->textInput(['readonly' => true]) ?>
+        <?= $form->field($model, 'plafon_terakhir')->textInput() ?>
 
         <b>Tanggal Pelunasan</b>
         <?= DatePicker::widget([
