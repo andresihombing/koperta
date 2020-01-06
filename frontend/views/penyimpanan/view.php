@@ -2,14 +2,18 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use frontend\models\PenyimpananSaldo;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Penyimpanan */
 
-$this->title = $model->penyimpanan_id;
+$this->title = "Detail Peminjaman";
 $this->params['breadcrumbs'][] = ['label' => 'Penyimpanans', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+
+$saldoAnggota = PenyimpananSaldo::find()->where(['anggota_id' => $model->anggota_id])->one();
+
 ?>
 <div class="penyimpanan">
 
@@ -55,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </tr>
                 <tr>
                     <td>Total Simpanan</td>
-                    <td></td>
+                    <td><?= $saldoAnggota->total_saldo ?></td>
                 </tr>
             </table>
 

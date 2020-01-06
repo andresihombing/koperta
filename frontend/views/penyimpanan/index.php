@@ -76,14 +76,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         //     'format' => 'raw',
                         //     'value' => 'petugas.name',
                         // ],
-                        [
-                            'attribute' => '',
-                            'label' => 'Total Simpanan',
-                            'format' => 'raw',
-                            'value' => function ($model){
+                        // [
+                        //     'attribute' => '',
+                        //     'label' => 'Total Simpanan',
+                        //     'format' => 'raw',
+                        //     'value' => function ($model){
                                 
-                            },
-                        ],
+                        //     },
+                        // ],
                         ['class' => 'common\components\ToolsColumn',
                             'template' => '{view} {edit} {delete}',
                             'header' => 'Aksi',
@@ -94,9 +94,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'edit' => function ($url, $model){
                                     return ToolsColumn::renderCustomButton($url, $model, 'Edit Transaksi', 'glyphicon glyphicon-pencil');
                                 },
-                                // 'delete' => function ($url, $model){
-                                //     return ToolsColumn::renderCustomButton($url, $model, 'Hapus Transaksi', 'glyphicon glyphicon-trash');
-                                // },
                             ],
                             'urlCreator' => function ($action, $model, $key, $index){
                                 if ($action === 'view') {
@@ -106,12 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     return Url::toRoute(['update', 'id' => $key]);
                                 } 
                                 else if ($action === 'delete') {
-                                    return Url::toRoute(['delete', 'id' => $key, [
-                        'class' => 'btn btn-danger',
-                        'data' => [
-                            'confirm' => 'Are you sure you want to delete this item?',
-                            'method' => 'post',
-                        ]]]);
+                                    return Url::toRoute(['delete', 'id' => $key]);
                                 }
                             }
                         ]

@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\Penyimpanan;
+use frontend\models\PenyimpananSaldo;
 use frontend\models\search\PenyimpananSearch;
 use frontend\models\Petugas;
 use yii\web\Controller;
@@ -69,11 +70,35 @@ class PenyimpananController extends Controller
     {
         $this->layout = 'main-3';
         $model = new Penyimpanan();
+        $modelPenyimpananSaldo = new PenyimpananSaldo();
         $petugas = Petugas::find()->where(['user_id' => Yii::$app->user->identity->id])->one(); 
 
         if ($model->load(Yii::$app->request->post()) ) {
-            date_default_timezone_set("Asia/Jakarta");
 
+            $penyimpananSaldo = PenyimpananSaldo::find()->where(['anggota_id' => $model->anggota_id])->one();
+            if($penyimpananSaldo == null){
+                if($model->tipe_penyimpanan_id == "1"){
+                    $modelPenyimpananSaldo->anggota_id = $model->anggota_id;
+                    $modelPenyimpananSaldo->total_saldo = $model->nilai_transaksi;
+                    $modelPenyimpananSaldo->save();
+                }else{
+                    Yii::$app->session->setFlash('error', 'Saldo tidak mencukupi');
+                    return $this->refresh();
+                }
+            }else{
+                if($model->tipe_penyimpanan_id == "1"){
+                    $penyimpananSaldo->total_saldo = $penyimpananSaldo->total_saldo + $model->nilai_transaksi;
+                    $penyimpananSaldo->save();
+                }elseif($model->tipe_penyimpanan_id == "2" && $penyimpananSaldo->total_saldo > $model->nilai_transaksi){
+                    $penyimpananSaldo->total_saldo = $penyimpananSaldo->total_saldo - $model->nilai_transaksi;
+                    $penyimpananSaldo->save();
+                }elseif($model->tipe_penyimpanan_id == "2" && $penyimpananSaldo->total_saldo < $model->nilai_transaksi){
+                    Yii::$app->session->setFlash('error', 'Saldo tidak mencukupi');
+                    return $this->refresh();
+                }
+            }
+
+            date_default_timezone_set("Asia/Jakarta");
             $model->koperasi_id = $_SESSION['koperasi_id'];
             $model->petugas_id = $petugas->petugas_id;
             $model->tgl_transaksi = date("Y-m-d H:i:s");
@@ -98,10 +123,31 @@ class PenyimpananController extends Controller
     {
         $this->layout = 'main-3';
         $model = $this->findModel($id);
+        $nilaiCurrent = $model->nilai_transaksi;
+
+        $petugas = Petugas::find()->where(['user_id' => Yii::$app->user->identity->id])->one();
 
         if ($model->load(Yii::$app->request->post()) ) {
+            $penyimpananSaldo = PenyimpananSaldo::find()->where(['anggota_id' => $model->anggota_id])->one();
+
+            if($model->tipe_penyimpanan_id == "1"){
+                // if($model->nilai_transaksi > $nilaiCurrent){
+                    $penyimpananSaldo->total_saldo = $penyimpananSaldo->total_saldo + ($model->nilai_transaksi - $nilaiCurrent);
+                // }else{
+                    // $penyimpananSaldo->total_saldo = $penyimpananSaldo->total_saldo + ($model->nilai_transaksi - $nilaiCurrent);
+                // }
+                $penyimpananSaldo->save();
+            }elseif($model->tipe_penyimpanan_id == "2" && $penyimpananSaldo->total_saldo > ($model->nilai_transaksi - $nilaiCurrent)){
+                $penyimpananSaldo->total_saldo = $penyimpananSaldo->total_saldo - ($model->nilai_transaksi - $nilaiCurrent);
+                $penyimpananSaldo->save();
+            }elseif($model->tipe_penyimpanan_id == "2" && $penyimpananSaldo->total_saldo < ($model->nilai_transaksi - $nilaiCurrent)){
+                Yii::$app->session->setFlash('error', 'Saldo tidak mencukupi');
+                return $this->refresh();
+            }
+
             date_default_timezone_set("Asia/Jakarta");
             $model->tgl_transaksi = date("Y-m-d H:i:s");
+            $model->petugas_id = $petugas->petugas_id;
 
             $model->save();
             return $this->redirect(['view', 'id' => $model->penyimpanan_id]);

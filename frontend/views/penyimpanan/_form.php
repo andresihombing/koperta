@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use frontend\models\Anggota;
-use frontend\models\TipePenyimpanan;
+use frontend\models\PenyimpananTipe;
 use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
@@ -40,7 +40,7 @@ use kartik\select2\Select2;
 
             <div class="col-sm-10">
               <?= $form->field($model, 'tipe_penyimpanan_id')->dropDownList(
-                ArrayHelper::map(TipePenyimpanan::find()->all(), 'tipe_penyimpanan_id', 'name'),["prompt"=>"Pilih tipe penyimpanan..."])->label(false)
+                ArrayHelper::map(PenyimpananTipe::find()->all(), 'tipe_penyimpanan_id', 'name'),["prompt"=>"Pilih tipe penyimpanan..."])->label(false)
               ?>
             </div>
           </div>
