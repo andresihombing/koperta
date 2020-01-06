@@ -5,21 +5,21 @@ namespace frontend\models;
 use Yii;
 
 /**
- * This is the model class for table "tipe_penyimpanan".
+ * This is the model class for table "penyimpanan_tipe".
  *
  * @property int $tipe_penyimpanan_id
  * @property string $name
  *
  * @property Penyimpanan[] $penyimpanans
  */
-class TipePenyimpanan extends \yii\db\ActiveRecord
+class PenyimpananTipe extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'tipe_penyimpanan';
+        return 'penyimpanan_tipe';
     }
 
     /**

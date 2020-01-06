@@ -18,7 +18,7 @@ use Yii;
  * @property Anggota $anggota
  * @property Koperasi $koperasi
  * @property Petugas $petugas
- * @property TipePenyimpanan $tipePenyimpanan
+ * @property PenyimpananTipe $tipePenyimpanan
  */
 class Penyimpanan extends \yii\db\ActiveRecord
 {
@@ -43,7 +43,7 @@ class Penyimpanan extends \yii\db\ActiveRecord
             [['anggota_id'], 'exist', 'skipOnError' => true, 'targetClass' => Anggota::className(), 'targetAttribute' => ['anggota_id' => 'anggota_id']],
             [['koperasi_id'], 'exist', 'skipOnError' => true, 'targetClass' => Koperasi::className(), 'targetAttribute' => ['koperasi_id' => 'koperasi_id']],
             [['petugas_id'], 'exist', 'skipOnError' => true, 'targetClass' => Petugas::className(), 'targetAttribute' => ['petugas_id' => 'petugas_id']],
-            [['tipe_penyimpanan_id'], 'exist', 'skipOnError' => true, 'targetClass' => TipePenyimpanan::className(), 'targetAttribute' => ['tipe_penyimpanan_id' => 'tipe_penyimpanan_id']],
+            [['tipe_penyimpanan_id'], 'exist', 'skipOnError' => true, 'targetClass' => PenyimpananTipe::className(), 'targetAttribute' => ['tipe_penyimpanan_id' => 'tipe_penyimpanan_id']],
         ];
     }
 
@@ -92,6 +92,6 @@ class Penyimpanan extends \yii\db\ActiveRecord
      */
     public function getTipePenyimpanan()
     {
-        return $this->hasOne(TipePenyimpanan::className(), ['tipe_penyimpanan_id' => 'tipe_penyimpanan_id']);
+        return $this->hasOne(PenyimpananTipe::className(), ['tipe_penyimpanan_id' => 'tipe_penyimpanan_id']);
     }
 }

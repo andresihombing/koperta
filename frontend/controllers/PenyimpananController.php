@@ -68,15 +68,16 @@ class PenyimpananController extends Controller
         $model = new Penyimpanan();
         $petugas = Petugas::find()->where(['user_id' => Yii::$app->user->identity->id])->one(); 
 
+        
         if ($model->load(Yii::$app->request->post()) ) {
-            date_default_timezone_set("Asia/Jakarta");
+            var_dump($model->tipe_penyimpanan_id);
+        //     date_default_timezone_set("Asia/Jakarta");
+        //     $model->koperasi_id = $_SESSION['koperasi_id'];
+        //     $model->petugas_id = $petugas->petugas_id;
+        //     $model->tgl_transaksi = date("Y-m-d H:i:s");
 
-            $model->koperasi_id = $_SESSION['koperasi_id'];
-            $model->petugas_id = $petugas->petugas_id;
-            $model->tgl_transaksi = date("Y-m-d H:i:s");
-
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->penyimpanan_id]);
+        //     $model->save();
+        //     return $this->redirect(['view', 'id' => $model->penyimpanan_id]);
         }
 
         return $this->render('create', [
