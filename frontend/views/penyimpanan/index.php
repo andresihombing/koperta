@@ -76,14 +76,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         //     'format' => 'raw',
                         //     'value' => 'petugas.name',
                         // ],
-                        [
-                            'attribute' => '',
-                            'label' => 'Total Simpanan',
-                            'format' => 'raw',
-                            'value' => function ($model){
+                        // [
+                        //     'attribute' => '',
+                        //     'label' => 'Total Simpanan',
+                        //     'format' => 'raw',
+                        //     'value' => function ($model){
                                 
-                            },
-                        ],
+                        //     },
+                        // ],
                         ['class' => 'common\components\ToolsColumn',
                             'template' => '{view} {edit} {delete}',
                             'header' => 'Aksi',
