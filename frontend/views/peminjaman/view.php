@@ -153,5 +153,43 @@ $jaminan = CustomSimpanPinjam::find()->where(['koperasi_id' => $_SESSION['kopera
                 ],
             ]) ?>
         <?php } ?>
+
+        <?php if ($jaminan->tanah == 1) { ?>
+            <h4 class="text-center">Jaminan Tanah Bangunan</h4><hr>
+            <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    // 'peminjaman_id',
+                     [
+                        'attribute' => 'nama_pemilik',
+                        'label' => 'Nama Pemilik',
+                        'value' => function($model){
+                            return $model->jaminanTanah->nama_pemilik;
+                        }
+                    ],
+                    [
+                        'attribute' => 'no',
+                        'label' => 'Nomor',
+                        'value' => function($model){
+                            return $model->jaminanTanah->no;
+                        }
+                    ],
+                    [
+                        'attribute' => 'status_hak_milik',
+                        'label' => 'Status Hak Milik',
+                        'value' => function($model){
+                            return $model->jaminanTanah->status_hak_milik;
+                        }
+                    ],
+                    [
+                        'attribute' => 'luas',
+                        'label' => 'Tahun Pembuatan',
+                        'value' => function($model){
+                            return $model->jaminanTanah->luas;
+                        }
+                    ],
+                ],
+            ]) ?>
+        <?php } ?>
     </div>
 </div>

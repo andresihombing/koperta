@@ -206,7 +206,7 @@ a.desc:after {
 ============================ */
 footer {
     padding:50px;
-    background:#1a57a5;
+    background:#495058;
 }
 
 footer p {
@@ -218,7 +218,7 @@ footer h4 {
     text-transform:uppercase;
     text-shadow:none;
     font-weight:550;
-    color:#272727;
+    color:#ffffff;
 }
 
 footer .btn-gamp a {
@@ -226,7 +226,7 @@ footer .btn-gamp a {
     text-transform: uppercase;
     letter-spacing: 3px;
     color: #fff;
-    width: 180px;
+    width: 250px;
     height: 60px;
     text-align: center;
     display: inline-block;

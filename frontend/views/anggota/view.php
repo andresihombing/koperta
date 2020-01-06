@@ -2,12 +2,13 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use common\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Anggota */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Anggotas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Anggota', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -29,6 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'anggota_id',
                 // 'koperasi_id',
                 'name',
+                'surname',
+                [
+                    'label'  => 'Email',
+                    'value'  => function ($model) {
+                        $user = User::find()->where(['id' => $model->user_id])->one();
+                        return $user->email;
+                    },
+                    'format' => 'raw',
+                ],
                 'dob',
                 'no_ktp',
                 'alamat_lengkap',
@@ -41,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         $test = '<font id="myImg"><a>'.$model->kk.'</a></font>
                         <div id="myModal" class="modal">
                             <span class="close">&times;</span>
-                            <img class="modal-content" id="img01" src="uploads/'.$model->kk.'" alt="Snow" style="width:100%;max-width:300px">
+                            <img class="modal-content" id="img01" src="uploads/anggota/'.$model->kk.'" alt="Snow" style="width:100%;max-width:300px">
                             <div id="caption">'.$model->name.'</div>
                         </div>';
                         return $test;
@@ -54,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         $test = '<font id="myImg2"><a>'.$model->ktp.'</a></font>
                         <div id="myModal2" class="modal">
                             <span class="close2">&times;</span>
-                            <img class="modal-content" id="img02" src="uploads/'.$model->ktp.'" alt="Snow" style="width:100%;max-width:300px">
+                            <img class="modal-content" id="img02" src="uploads/anggota/'.$model->ktp.'" alt="Snow" style="width:100%;max-width:300px">
                             <div id="caption">'.$model->name.'</div>
                         </div>';
                         return $test;
@@ -251,4 +261,3 @@ $this->params['breadcrumbs'][] = $this->title;
         }"
     );
 ?>
-
