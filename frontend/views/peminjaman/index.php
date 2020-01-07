@@ -60,17 +60,19 @@ $this->params['breadcrumbs'][] = $this->title;
             //'tanggal_pelunasan',
 
             ['class' => 'common\components\ToolsColumn',
-                'template' => '{view} {approve} {edit}',
-                // 'buttons' => [                    
-                //     'approve' => function ($url, $model){                        
-                //         return ToolsColumn::renderCustomButton($url, $model, 'Approve', 'glyphicon glyphicon-pencil');
-                //     }
-                // ],
+                'template' => '{view} {cicilan} {edit}',
+                'buttons' => [                    
+                    'cicilan' => function ($url, $model){                        
+                        return ToolsColumn::renderCustomButton($url, $model, 'Cicilan', 'glyphicon glyphicon-plus');
+                    }
+                ],
                 'urlCreator' => function ($action, $model, $key, $index){
                     if ($action === 'view') {
                         return Url::toRoute(['view', 'id' => $key]);
                     }else if ($action === 'edit') {
                         return Url::toRoute(['update', 'id' => $key]);
+                    }else if($action === 'cicilan'){
+                        return Url::toRoute(['cicilan-peminjaman/index', 'id' => $key]);
                     }
                 }
             ],

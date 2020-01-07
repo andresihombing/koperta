@@ -62,6 +62,16 @@ class AnggotaController extends Controller
         ]);
     }
 
+    protected function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
     /**
      * Creates a new Anggota model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -71,10 +81,10 @@ class AnggotaController extends Controller
     {   
         $this->layout = "main-3";
         $model = new Anggota();
-
         if ($model->load(Yii::$app->request->post())) {
             $arrUsername = explode(' ',trim($model->name));
-            $username = strtolower($arrUsername[0]) .''. str_replace('-', '', $model->dob);
+            // $username = strtolower($arrUsername[0]) .''. str_replace('-', '', $model->dob) .''. generateRandomString();
+            $username = strtolower($arrUsername[0]) .''. $this->generateRandomString();
 
             $user = new User();
             $user->username = $username;
