@@ -102,11 +102,11 @@ class JaminanTanahController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($id, $form)
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['peminjaman/update', 'id' => $form]);
     }
 
     /**

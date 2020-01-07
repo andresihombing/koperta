@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * JaminanTanahBangunanController implements the CRUD actions for JaminanTanahBangunan model.
  */
-class JaminanTanahBangunanController extends Controller
+class JaminanBangunanController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -35,7 +35,7 @@ class JaminanTanahBangunanController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new JaminanTanahBangunanSearch();
+        $searchModel = new JaminanBangunanSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -64,7 +64,7 @@ class JaminanTanahBangunanController extends Controller
      */
     public function actionCreate()
     {
-        $model = new JaminanTanahBangunan();
+        $model = new JaminanBangunan();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->jaminan_tanah_bangunan_id]);
@@ -102,11 +102,11 @@ class JaminanTanahBangunanController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($id, $form)
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['peminjaman/update', 'id' => $form]);
     }
 
     /**
@@ -118,7 +118,7 @@ class JaminanTanahBangunanController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = JaminanTanahBangunan::findOne($id)) !== null) {
+        if (($model = JaminanBangunan::findOne($id)) !== null) {
             return $model;
         }
 

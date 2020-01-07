@@ -127,7 +127,18 @@ MaskedInputAsset::register($this);
             <?= $form->field($model, 'warna_kendaraan')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'nilai_harga_kendaraan')->textInput() ?>
-        <?php } ?>    
+        <?php } 
+            if($model->jaminan_kendaraan_id != null){
+                echo Html::a('Hapus Jaminan', ['jaminan-kendaraan/delete', 'id' => $model->jaminan_kendaraan_id, 'form' => $_GET['id']], [
+                    'class' => 'btn btn-danger',
+                    'data' => [
+                        'confirm' => 'Hapus sebagai jaminan?',
+                        'method' => 'post',
+                    ],
+                ]);
+            }
+        ?>
+        
 
         <!-- jaminan tanah bangunan -->        
         <?php if ($jaminan->bangunan == 1) { ?>
@@ -139,7 +150,17 @@ MaskedInputAsset::register($this);
             <?= $form->field($model, 'status_hak_milik_bangunan')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'luas_bangunan')->textInput() ?>
-        <?php } ?> 
+        <?php } 
+            if($model->jaminan_bangunan_id != null){
+                echo Html::a('Hapus Jaminan', ['jaminan-bangunan/delete', 'id' => $model->jaminan_bangunan_id, 'form' => $_GET['id']], [
+                    'class' => 'btn btn-danger',
+                    'data' => [
+                        'confirm' => 'Hapus sebagai jaminan?',
+                        'method' => 'post',
+                    ],
+                ]);
+            }
+        ?> 
 
         <!-- jaminan tanah tanah -->        
         <?php if ($jaminan->tanah == 1) { ?>
@@ -151,7 +172,17 @@ MaskedInputAsset::register($this);
             <?= $form->field($model, 'status_hak_milik_tanah')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'luas_tanah')->textInput() ?>
-        <?php } ?>    
+        <?php } 
+            if($model->jaminan_tanah_id != null){
+                echo Html::a('Hapus Jaminan', ['jaminan-tanah/delete', 'id' => $model->jaminan_tanah_id, 'form' => $_GET['id']], [
+                    'class' => 'btn btn-danger',
+                    'data' => [
+                        'confirm' => 'Hapus sebagai jaminan?',
+                        'method' => 'post',
+                    ],
+                ]);
+            }
+        ?>   
     </div>
 
     <div class="col-md-12">
